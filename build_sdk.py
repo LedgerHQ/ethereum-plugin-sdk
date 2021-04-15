@@ -58,9 +58,9 @@ def merge_headers(sources, nodes_to_extract):
         f.write(eth_internals_h)
 
 
-def strip_headers_and_copy(headers_merged, headers_to_strip_and_copy):
+def strip_headers_and_copy(merged_headers, headers_to_strip_and_copy):
 
-    headers_merged = [os.path.basename(path) for path in headers_merged]
+    merged_headers = [os.path.basename(path) for path in merged_headers]
 
     with open("src/eth_plugin_interface.h", 'r') as f:
         source = f.readlines()
@@ -68,11 +68,16 @@ def strip_headers_and_copy(headers_merged, headers_to_strip_and_copy):
     eth_plugin_interface_h = ["/* This file is auto-generated, don't edit it */\n"]
     for line in source:
         eth_plugin_interface_h += [line]
-        for header in headers_merged:
+        for header in merged_headers:
             if header in line:
                 del eth_plugin_interface_h[-1]
                 break
 
+    # add '#include "eth_internals.h"'
+    include_index = eth_plugin_interface_h.index('#include "cx.h"\n')
+    eth_plugin_interface_h.insert(include_index+1, '#include "eth_internals.h"\n')
+
+    # dump to file
     with open("ethereum-plugin-sdk/include/eth_plugin_interface.h", 'w') as f:
         f.writelines(eth_plugin_interface_h)
 

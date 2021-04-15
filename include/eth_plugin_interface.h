@@ -5,6 +5,7 @@
 
 #include "os.h"
 #include "cx.h"
+#include "eth_internals.h"
 
 #define PLUGIN_ID_LENGTH 30
 
