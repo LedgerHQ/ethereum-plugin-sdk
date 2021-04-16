@@ -58,7 +58,7 @@ def merge_headers(sources, nodes_to_extract):
         f.write(eth_internals_h)
 
 
-def strip_headers_and_copy(merged_headers, headers_to_strip_and_copy):
+def copy_and_replace_headers(merged_headers, headers_to_strip_and_copy):
 
     merged_headers = [os.path.basename(path) for path in merged_headers]
 
@@ -100,5 +100,5 @@ if __name__ == "__main__":
     headers_to_strip_and_copy = [
         "src/eth_plugin_interface.h"
     ]
-    strip_headers_and_copy(headers_to_merge, headers_to_strip_and_copy)
+    copy_and_replace_headers(headers_to_merge, headers_to_strip_and_copy)
 
