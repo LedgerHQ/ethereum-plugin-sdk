@@ -19,12 +19,18 @@ def extract_from_headers(sources, nodes_to_extract):
     for key, values in nodes_to_extract.items():
         for value in values:
             node = []
-            unclosed_curvy_brackets = 0
+            unclosed_curvy_brackets = False 
+            unclosed_parantheses = False 
             for line in cat_sources:
                 if key in line and value in line:
                     node += [line]
                     unclosed_curvy_brackets = line.count('{') - line.count('}')
-                    if unclosed_curvy_brackets == 0:
+                    if unclosed_curvy_brackets == False:
+                        break
+                elif (key == "fn" and value in line) or unclosed_parantheses:
+                    node += [line]
+                    unclosed_parantheses = line.find(")") == -1
+                    if unclosed_parantheses == False:
                         break
                 elif unclosed_curvy_brackets:
                     node += [line]
@@ -89,16 +95,20 @@ if __name__ == "__main__":
     headers_to_merge = [
         "src/tokens.h",
         "src_common/ethUstream.h",
+        "src_common/ethUtils.h",
+        "src/chainConfig.h"
     ]
     nodes_to_extract = {
-        "#define": ["MAX_TICKER_LEN"],
-        "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t"]
+        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH"],
+        "typedef enum": ["chain_kind_e"],
+        "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
+        "fn": ["getEthAddressStringFromBinary"],
     }
     merge_headers(headers_to_merge, nodes_to_extract)
 
     # these headers will be stripped from all #include related to previously merged headers
     headers_to_strip_and_copy = [
-        "src/eth_plugin_interface.h"
+        "src/eth_plugin_interface.h",
     ]
     copy_and_replace_headers(headers_to_merge, headers_to_strip_and_copy)
 
