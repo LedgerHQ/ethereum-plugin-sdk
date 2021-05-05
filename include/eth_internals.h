@@ -63,6 +63,7 @@ typedef struct txContent_t {
     txInt256_t startgas;
     txInt256_t value;
     txInt256_t nonce;
+    txInt256_t chainID;
     uint8_t destination[ADDRESS_LENGTH];
     uint8_t destinationLength;
     uint8_t v[4];
