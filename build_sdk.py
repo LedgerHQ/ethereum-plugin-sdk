@@ -42,13 +42,44 @@ def extract_from_headers(sources, nodes_to_extract):
 
             sdk_body += [''.join(node)]
 
+    return '\n'.join(sdk_body)
+
+def extract_from_c_files(sources, nodes_to_extract):
+    cat_sources = []
+    for source in sources:
+        with open(source, 'r') as f:
+            cat_sources += f.readlines()
+
+    sdk_body = []
+    for node_name in nodes_to_extract:
+        node = []
+        copying = False
+        wait_curvy_bracket = True
+        for line in cat_sources:
+            if node_name in line:
+                copying = True
+                node += [line]
+                unclosed_curvy_brackets = line.count('{') - line.count('}')
+            elif copying:
+                node += [line]
+                unclosed_curvy_brackets += line.count('{') - line.count('}')
+                if wait_curvy_bracket:
+                    wait_curvy_bracket = line.count('{') == 0
+                if unclosed_curvy_brackets or wait_curvy_bracket:
+                    continue
+                else:
+                    break
+
+        sdk_body += [''.join(node)]
 
     return '\n'.join(sdk_body)
 
 def merge_headers(sources, nodes_to_extract):
     includes = [
         '#include "os.h"',
-        '#include "cx.h"'
+        '#include "cx.h"',
+        '#include "stdbool.h"',
+        '#include "string.h"'
     ]
 
     body = extract_from_headers(sources, nodes_to_extract)
@@ -64,11 +95,11 @@ def merge_headers(sources, nodes_to_extract):
         f.write(eth_internals_h)
 
 
-def copy_and_replace_headers(merged_headers, headers_to_strip_and_copy):
+def copy_header(header_to_copy, merged_headers):
 
     merged_headers = [os.path.basename(path) for path in merged_headers]
 
-    with open("src/eth_plugin_interface.h", 'r') as f:
+    with open(header_to_copy, 'r') as f:
         source = f.readlines()
 
     eth_plugin_interface_h = ["/* This file is auto-generated, don't edit it */\n"]
@@ -88,27 +119,50 @@ def copy_and_replace_headers(merged_headers, headers_to_strip_and_copy):
         f.writelines(eth_plugin_interface_h)
 
 
+def merge_c_files(sources, nodes_to_extract):
+    includes = [
+        '#include "eth_internals.h"'
+    ]
+
+    body = extract_from_c_files(sources, nodes_to_extract)
+
+    eth_internals_h = '\n\n'.join([
+        "/* This file is auto-generated, don't edit it */",
+        '\n'.join(includes),
+        body
+    ])
+
+    with open("ethereum-plugin-sdk/include/eth_internals.c", 'w') as f:
+        f.write(eth_internals_h)
+
 
 if __name__ == "__main__":
 
-    # some nodes will be extracted from these headers and merged into a new one
+    # some nodes will be extracted from these headers and merged into a new one, copied to sdk
     headers_to_merge = [
         "src/tokens.h",
+        "src/chainConfig.h",
+        "src/utils.h",
         "src_common/ethUstream.h",
-        "src_common/ethUtils.h",
-        "src/chainConfig.h"
+        "src_common/ethUtils.h"
     ]
     nodes_to_extract = {
         "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH"],
         "typedef enum": ["chain_kind_e"],
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
-        "fn": ["getEthAddressStringFromBinary"],
+        "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
+        "const": ["HEXDIGITS"],
+        "fn": ["void getEthAddressStringFromBinary", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString"]
     }
     merge_headers(headers_to_merge, nodes_to_extract)
 
-    # these headers will be stripped from all #include related to previously merged headers
-    headers_to_strip_and_copy = [
-        "src/eth_plugin_interface.h",
+    # this header will be stripped from all #include related to previously merged headers, then copied to sdk
+    copy_header("src/eth_plugin_interface.h", headers_to_merge)
+
+    # extract and merge function bodies
+    c_files_to_merge = [
+        "src/utils.c",
+        "src_common/ethUtils.c"
     ]
-    copy_and_replace_headers(headers_to_merge, headers_to_strip_and_copy)
+    merge_c_files(c_files_to_merge, nodes_to_extract["fn"])
 
