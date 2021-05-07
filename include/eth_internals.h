@@ -13,6 +13,8 @@
 
 #define INT256_LENGTH  32
 
+#define WEI_TO_ETHER 18
+
 typedef enum chain_kind_e {
     CHAIN_KIND_ETHEREUM,
     CHAIN_KIND_ETHEREUM_CLASSIC,

@@ -144,10 +144,11 @@ if __name__ == "__main__":
         "src/chainConfig.h",
         "src/utils.h",
         "src_common/ethUstream.h",
-        "src_common/ethUtils.h"
+        "src_common/ethUtils.h",
+        "src/shared_context.h"
     ]
     nodes_to_extract = {
-        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH"],
+        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER"],
         "typedef enum": ["chain_kind_e"],
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
