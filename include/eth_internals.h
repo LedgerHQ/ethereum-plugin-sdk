@@ -15,6 +15,10 @@
 
 #define WEI_TO_ETHER 18
 
+#define SHARED_CTX_FIELD_1_SIZE 100
+
+#define SHARED_CTX_FIELD_2_SIZE 40
+
 typedef enum chain_kind_e {
     CHAIN_KIND_ETHEREUM,
     CHAIN_KIND_ETHEREUM_CLASSIC,
@@ -102,7 +106,7 @@ bool adjustDecimals(char *src,
                     uint32_t targetLength,
                     uint8_t decimals);
 
-bool uint256_to_decimal(const uint8_t *value, char *out, size_t out_len);
+bool uint256_to_decimal(const uint8_t* value, char* out, size_t out_len);
 
 void amountToString(uint8_t* amount,
                     uint8_t amount_len,
