@@ -78,8 +78,8 @@ def merge_headers(sources, nodes_to_extract):
     includes = [
         '#include "os.h"',
         '#include "cx.h"',
-        '#include "stdbool.h"',
-        '#include "string.h"'
+        '#include <stdbool.h>',
+        '#include <string.h>'
     ]
 
     body = extract_from_headers(sources, nodes_to_extract)
@@ -148,7 +148,7 @@ if __name__ == "__main__":
         "src/shared_context.h"
     ]
     nodes_to_extract = {
-        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SHARED_CTX_FIELD_1_SIZE", "SHARED_CTX_FIELD_2_SIZE"],
+        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER"],
         "typedef enum": ["chain_kind_e"],
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
@@ -166,4 +166,3 @@ if __name__ == "__main__":
         "src_common/ethUtils.c"
     ]
     merge_c_files(c_files_to_merge, nodes_to_extract["fn"])
-

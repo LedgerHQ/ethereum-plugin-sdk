@@ -4,8 +4,8 @@
 
 #include "os.h"
 #include "cx.h"
-#include "stdbool.h"
-#include "string.h"
+#include <stdbool.h>
+#include <string.h>
 
 #define MAX_TICKER_LEN 12  // 10 characters + ' ' + '\0'
 
@@ -14,10 +14,6 @@
 #define INT256_LENGTH  32
 
 #define WEI_TO_ETHER 18
-
-#define SHARED_CTX_FIELD_1_SIZE 100
-
-#define SHARED_CTX_FIELD_2_SIZE 40
 
 typedef enum chain_kind_e {
     CHAIN_KIND_ETHEREUM,
@@ -84,16 +80,17 @@ typedef struct chain_config_s {
     chain_kind_t kind;
 } chain_config_t;
 
-__attribute__((no_instrument_function)) inline int allzeroes(uint8_t *buf, int n) {
-    for (int i = 0; i < n; ++i) {
-        if (buf[i]) {
+__attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
+    uint8_t *p = (uint8_t *) buf;
+    for (size_t i = 0; i < n; ++i) {
+        if (p[i]) {
             return 0;
         }
     }
     return 1;
 }
 
-static const uint8_t const HEXDIGITS[] = "0123456789abcdef";
+static const char HEXDIGITS[] = "0123456789abcdef";
 
 void getEthAddressStringFromBinary(uint8_t *address,
                                    uint8_t *out,
@@ -108,9 +105,9 @@ bool adjustDecimals(char *src,
 
 bool uint256_to_decimal(const uint8_t* value, char* out, size_t out_len);
 
-void amountToString(uint8_t* amount,
+void amountToString(const uint8_t* amount,
                     uint8_t amount_len,
                     uint8_t decimals,
-                    char* ticker,
+                    const char* ticker,
                     char* out_buffer,
                     uint8_t out_buffer_size);
