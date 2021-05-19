@@ -103,7 +103,7 @@ bool adjustDecimals(char *src,
                     uint32_t targetLength,
                     uint8_t decimals);
 
-bool uint256_to_decimal(const uint8_t* value, char* out, size_t out_len);
+bool uint256_to_decimal(const uint8_t* value, size_t value_len, char* out, size_t out_len);
 
 void amountToString(const uint8_t* amount,
                     uint8_t amount_len,
