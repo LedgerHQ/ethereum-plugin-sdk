@@ -61,6 +61,13 @@ void getEthAddressStringFromBinary(uint8_t *address,
     out[40] = '\0';
 }
 
+void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out, cx_sha3_t *sha3Context) {
+    uint8_t hashAddress[INT256_LENGTH];
+    cx_keccak_init(sha3Context, 256);
+    cx_hash((cx_hash_t *) sha3Context, CX_LAST, publicKey->W + 1, 64, hashAddress, 32);
+    memmove(out, hashAddress + 12, 20);
+}
+
 bool adjustDecimals(char *src,
                     uint32_t srcLength,
                     char *target,

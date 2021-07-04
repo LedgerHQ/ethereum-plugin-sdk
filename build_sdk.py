@@ -64,8 +64,8 @@ def extract_from_c_files(sources, nodes_to_extract):
                 node += [line]
                 unclosed_curvy_brackets += line.count('{') - line.count('}')
                 if wait_curvy_bracket:
-                    wait_curvy_bracket = line.count('{') == 0
-                if unclosed_curvy_brackets or wait_curvy_bracket:
+                    wait_curvy_bracket = line.count('}') == 0
+                if unclosed_curvy_brackets != 0 or wait_curvy_bracket:
                     continue
                 else:
                     break
@@ -153,7 +153,7 @@ if __name__ == "__main__":
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
         "const": ["HEXDIGITS"],
-        "fn": ["void getEthAddressStringFromBinary", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString"]
+        "fn": ["void getEthAddressStringFromBinary", "void getEthAddressFromKey", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString"]
     }
     merge_headers(headers_to_merge, nodes_to_extract)
 
