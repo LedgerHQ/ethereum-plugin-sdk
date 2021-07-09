@@ -11,7 +11,7 @@
 
 #define ADDRESS_LENGTH 20
 
-#define INT256_LENGTH 32
+#define INT256_LENGTH  32
 
 #define WEI_TO_ETHER 18
 
@@ -107,11 +107,11 @@ bool adjustDecimals(char *src,
                     uint32_t targetLength,
                     uint8_t decimals);
 
-bool uint256_to_decimal(const uint8_t *value, size_t value_len, char *out, size_t out_len);
+bool uint256_to_decimal(const uint8_t* value, size_t value_len, char* out, size_t out_len);
 
-void amountToString(const uint8_t *amount,
+void amountToString(const uint8_t* amount,
                     uint8_t amount_len,
                     uint8_t decimals,
-                    const char *ticker,
-                    char *out_buffer,
+                    const char* ticker,
+                    char* out_buffer,
                     uint8_t out_buffer_size);
