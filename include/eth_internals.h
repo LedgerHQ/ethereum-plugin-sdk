@@ -95,7 +95,7 @@ __attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n
 static const char HEXDIGITS[] = "0123456789abcdef";
 
 void getEthAddressStringFromBinary(uint8_t *address,
-                                   uint8_t *out,
+                                   char *out,
                                    cx_sha3_t *sha3Context,
                                    chain_config_t *chain_config);
 
