@@ -9,6 +9,7 @@ python3 ethereum-plugin-sdk/build_sdk.py
 
 import os
 
+
 def extract_from_headers(sources, nodes_to_extract):
     cat_sources = []
     for source in sources:
@@ -19,8 +20,8 @@ def extract_from_headers(sources, nodes_to_extract):
     for key, values in nodes_to_extract.items():
         for value in values:
             node = []
-            unclosed_curvy_brackets = False 
-            unclosed_parantheses = False 
+            unclosed_curvy_brackets = False
+            unclosed_parantheses = False
             for line in cat_sources:
                 if key in line and value in line:
                     node += [line]
@@ -34,7 +35,8 @@ def extract_from_headers(sources, nodes_to_extract):
                         break
                 elif unclosed_curvy_brackets:
                     node += [line]
-                    unclosed_curvy_brackets += line.count('{') - line.count('}')
+                    unclosed_curvy_brackets += line.count(
+                        '{') - line.count('}')
                     if unclosed_curvy_brackets:
                         continue
                     else:
@@ -43,6 +45,7 @@ def extract_from_headers(sources, nodes_to_extract):
             sdk_body += [''.join(node)]
 
     return '\n'.join(sdk_body)
+
 
 def extract_from_c_files(sources, nodes_to_extract):
     cat_sources = []
@@ -74,6 +77,7 @@ def extract_from_c_files(sources, nodes_to_extract):
 
     return '\n'.join(sdk_body)
 
+
 def merge_headers(sources, nodes_to_extract):
     includes = [
         '#include "os.h"',
@@ -102,7 +106,8 @@ def copy_header(header_to_copy, merged_headers):
     with open(header_to_copy, 'r') as f:
         source = f.readlines()
 
-    eth_plugin_interface_h = ["/* This file is auto-generated, don't edit it */\n"]
+    eth_plugin_interface_h = [
+        "/* This file is auto-generated, don't edit it */\n"]
     for line in source:
         eth_plugin_interface_h += [line]
         for header in merged_headers:
@@ -112,7 +117,8 @@ def copy_header(header_to_copy, merged_headers):
 
     # add '#include "eth_internals.h"'
     include_index = eth_plugin_interface_h.index('#include "cx.h"\n')
-    eth_plugin_interface_h.insert(include_index+1, '#include "eth_internals.h"\n')
+    eth_plugin_interface_h.insert(
+        include_index+1, '#include "eth_internals.h"\n')
 
     # dump to file
     with open("ethereum-plugin-sdk/include/eth_plugin_interface.h", 'w') as f:
@@ -145,10 +151,11 @@ if __name__ == "__main__":
         "src/utils.h",
         "src_common/ethUstream.h",
         "src_common/ethUtils.h",
-        "src/shared_context.h"
+        "src/shared_context.h",
+        "src/eth_plugin_internal.h"
     ]
     nodes_to_extract = {
-        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER"],
+        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SELECTOR_SIZE", "PARAMETER_LENGTH", "RUN_APPLICATION"],
         "typedef enum": ["chain_kind_e"],
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],

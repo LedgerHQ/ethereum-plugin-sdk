@@ -15,6 +15,12 @@
 
 #define WEI_TO_ETHER 18
 
+#define SELECTOR_SIZE 4
+
+#define PARAMETER_LENGTH 32
+
+#define RUN_APPLICATION 1
+
 typedef enum chain_kind_e {
     CHAIN_KIND_ETHEREUM,
     CHAIN_KIND_ETHEREUM_CLASSIC,
@@ -48,8 +54,7 @@ typedef enum chain_kind_e {
     CHAIN_KIND_THUNDERCORE,
     CHAIN_KIND_FLARE,
     CHAIN_KIND_THETA,
-    CHAIN_KIND_BSC,
-    CHAIN_KIND_SONGBIRD
+    CHAIN_KIND_BSC
 } chain_kind_t;
 
 typedef struct tokenDefinition_t {
