@@ -79,14 +79,14 @@ typedef struct txContent_t {
     txInt256_t chainID;
     uint8_t destination[ADDRESS_LENGTH];
     uint8_t destinationLength;
-    uint8_t v[4];
+    uint8_t v[8];
     uint8_t vLength;
     bool dataPresent;
 } txContent_t;
 
 typedef struct chain_config_s {
     char coinName[10];  // ticker
-    uint32_t chainId;
+    uint64_t chainId;
     chain_kind_t kind;
 } chain_config_t;
 
@@ -123,3 +123,5 @@ void amountToString(const uint8_t *amount,
                     const char *ticker,
                     char *out_buffer,
                     uint8_t out_buffer_size);
+
+void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);

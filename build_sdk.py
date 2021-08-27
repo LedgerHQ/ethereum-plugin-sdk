@@ -160,7 +160,7 @@ if __name__ == "__main__":
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
         "const": ["HEXDIGITS"],
-        "fn": ["void getEthAddressStringFromBinary", "void getEthAddressFromKey", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString"]
+        "fn": ["void getEthAddressStringFromBinary", "void getEthAddressFromKey", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString", "void u64_to_string"]
     }
     merge_headers(headers_to_merge, nodes_to_extract)
 
