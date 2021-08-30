@@ -5,7 +5,7 @@
 void getEthAddressStringFromBinary(uint8_t *address,
                                    char *out,
                                    cx_sha3_t *sha3Context,
-                                   chain_config_t *chain_config) {
+                                   uint64_t chainId) {
     // save some precious stack space
     union locals_union {
         uint8_t hashChecksum[INT256_LENGTH];
@@ -15,14 +15,14 @@ void getEthAddressStringFromBinary(uint8_t *address,
     uint8_t i;
     bool eip1191 = false;
     uint32_t offset = 0;
-    switch (chain_config->chainId) {
+    switch (chainId) {
         case 30:
         case 31:
             eip1191 = true;
             break;
     }
     if (eip1191) {
-        u64_to_string(chain_config->chainId, (char *) locals_union.tmp, sizeof(locals_union.tmp));
+        u64_to_string(chainId, (char *) locals_union.tmp, sizeof(locals_union.tmp));
         offset = strnlen((char *) locals_union.tmp, sizeof(locals_union.tmp));
         strlcat((char *) locals_union.tmp + offset, "0x", sizeof(locals_union.tmp) - offset);
         offset = strnlen((char *) locals_union.tmp, sizeof(locals_union.tmp));
@@ -65,6 +65,20 @@ void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out, cx_sha3
     cx_keccak_init(sha3Context, 256);
     cx_hash((cx_hash_t *) sha3Context, CX_LAST, publicKey->W + 1, 64, hashAddress, 32);
     memmove(out, hashAddress + 12, 20);
+}
+
+void getEthDisplayableAddress(uint8_t *in,
+                              char *out,
+                              size_t out_len,
+                              cx_sha3_t *sha3,
+                              uint64_t chainId) {
+    if (out_len < 43) {
+        strlcpy(out, "ERROR", out_len);
+        return;
+    }
+    out[0] = '0';
+    out[1] = 'x';
+    getEthAddressStringFromBinary(in, out + 2, sha3, chainId);
 }
 
 bool adjustDecimals(char *src,
