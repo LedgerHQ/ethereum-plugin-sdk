@@ -53,8 +53,8 @@ typedef enum chain_kind_e {
     CHAIN_KIND_WEBCHAIN,
     CHAIN_KIND_THUNDERCORE,
     CHAIN_KIND_FLARE,
-    CHAIN_KIND_THETA,
-    CHAIN_KIND_BSC
+    CHAIN_KIND_BSC,
+    CHAIN_KIND_SONGBIRD
 } chain_kind_t;
 
 typedef struct tokenDefinition_t {
