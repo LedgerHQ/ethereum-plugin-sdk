@@ -1,4 +1,6 @@
+#![allow(non_snake_case)]
 use cty;
+use nanos_sdk::bindings::cx_sha3_t;
 
 pub const PLUGIN_ID_LENGTH: usize = 30;
 pub const MAX_TICKER_LEN: usize = 12; // 10 characters + ' ' + '\0'
@@ -60,8 +62,8 @@ pub type PluginCall =
 
 /// Shared objects, read-write
 #[repr(C)]
-struct PluginSharedRW {
-    sha3: *mut cx_sha3_t,
+pub struct PluginSharedRW {
+    pub sha3: *mut cx_sha3_t,
 }
 
 #[repr(C)]
@@ -92,7 +94,7 @@ pub struct PluginSharedRO {
 
 /// Init Contract
 #[repr(C)]
-struct PluginInitContract {
+pub struct PluginInitContract {
     pub interfaceVersion: PluginInterfaceVersion,
     pub result: u8,
 
@@ -109,7 +111,7 @@ struct PluginInitContract {
 
 /// Provide parameter
 #[repr(C)]
-struct PluginProvideParameter {
+pub struct PluginProvideParameter {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
@@ -120,7 +122,7 @@ struct PluginProvideParameter {
 
 /// Finalize
 #[repr(C)]
-struct PluginFinalize {
+pub struct PluginFinalize {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
@@ -146,7 +148,7 @@ struct PluginFinalize {
 
 // Provide token
 #[repr(C)]
-struct PluginProvideToken {
+pub struct PluginProvideToken {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
@@ -162,7 +164,7 @@ struct PluginProvideToken {
 // Query Contract name and version
 // This is always called on the non aliased contract
 #[repr(C)]
-struct PluginQueryContractId {
+pub struct PluginQueryContractId {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
@@ -177,7 +179,7 @@ struct PluginQueryContractId {
 
 // Query Contract UI
 #[repr(C)]
-struct PluginQueryContractUi {
+pub struct PluginQueryContractUi {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,

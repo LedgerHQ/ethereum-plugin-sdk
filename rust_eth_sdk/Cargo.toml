@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 cty = "0.2.1"
+nanos_sdk = { git = "https://github.com/LedgerHQ/ledger-nanos-sdk.git" } 
