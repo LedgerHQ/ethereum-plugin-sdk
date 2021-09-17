@@ -1,16 +1,12 @@
-pub static PLUGIN_ID_LENGTH: u8 = 30;
+use cty;
 
-pub static MAX_TICKER_LEN: u8 = 12; // 10 characters + ' ' + '\0'
-
-pub static ADDRESS_LENGTH: u8 = 20;
-
-pub static INT256_LENGTH: u8 = 32;
-
-pub static WEI_TO_ETHER: u8 = 18;
-
-pub static SELECTOR_SIZE: u8 = 4;
-
-pub static PARAMETER_LENGTH: u8 = 32;
+pub const PLUGIN_ID_LENGTH: usize = 30;
+pub const MAX_TICKER_LEN: usize = 12; // 10 characters + ' ' + '\0'
+pub const ADDRESS_LENGTH: usize = 20;
+pub const INT256_LENGTH: usize = 32;
+pub const WEI_TO_ETHER: u8 = 18;
+pub const SELECTOR_SIZE: u8 = 4;
+pub const PARAMETER_LENGTH: usize = 32;
 
 #[repr(u8)]
 pub enum EthereumArg {
@@ -26,7 +22,7 @@ pub enum PluginInterfaceVersion {
 
 #[repr(u16)]
 pub enum PluginMsg {
-    InitContract = 257;
+    InitContract = 257,
     ProvideParameter = 258,
     Finalize = 259,
     ProvideToken = 260,
@@ -54,12 +50,13 @@ pub enum UiType {
 
 #[repr(C)]
 pub struct tokenDefinition_t {
-    pub address: [u8; 20usize],
-    pub ticker: [i8; 12usize],
+    pub address: [u8; ADDRESS_LENGTH],
+    pub ticker: [i8; MAX_TICKER_LEN],
     pub decimals: u8,
 }
 
-pub type PluginCall = ::core::option::Option<unsafe extern "C" fn(arg1: cty::c_int, arg2: *mut cty::c_void)>;
+pub type PluginCall =
+    ::core::option::Option<unsafe extern "C" fn(arg1: cty::c_int, arg2: *mut cty::c_void)>;
 
 /// Shared objects, read-write
 #[repr(C)]
@@ -69,7 +66,7 @@ struct PluginSharedRW {
 
 #[repr(C)]
 pub struct txInt256_t {
-    pub value: [u8; 32usize],
+    pub value: [u8; INT256_LENGTH],
     pub length: u8,
 }
 
@@ -80,7 +77,7 @@ pub struct txContent_t {
     pub value: txInt256_t,
     pub nonce: txInt256_t,
     pub chainID: txInt256_t,
-    pub destination: [u8; 20usize],
+    pub destination: [u8; ADDRESS_LENGTH],
     pub destinationLength: u8,
     pub v: [u8; 8usize],
     pub vLength: u8,
@@ -123,7 +120,7 @@ struct PluginProvideParameter {
 
 /// Finalize
 #[repr(C)]
-typedef struct ethPluginFinalize_t {
+struct PluginFinalize {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
@@ -131,10 +128,9 @@ typedef struct ethPluginFinalize_t {
     pub tokenLookup1: *mut u8, // set by the plugin if a token should be looked up
     pub tokenLookup2: *mut u8,
 
-    pub amount: *mut u8, // set an uint256 pointer if uiType is UI_AMOUNT_ADDRESS
+    pub amount: *mut u8,  // set an uint256 pointer if uiType is UI_AMOUNT_ADDRESS
     pub address: *mut u8, // set to the destination address if uiType is UI_AMOUNT_ADDRESS. Set to the
-                      // user's address if uiType is UI_TYPE_GENERIC
-
+    // user's address if uiType is UI_TYPE_GENERIC
     pub uiType: UiType,
     pub numScreens: u8, // ignored if uiType is UI_AMOUNT_ADDRESS
     pub result: u8,
@@ -159,7 +155,7 @@ struct PluginProvideToken {
     pub token2: *mut tokenDefinition_t,
 
     pub additionalScreens: u8, // Used by the plugin if it needs to display additional screens
-                               // based on the information received from the token definitions.
+    // based on the information received from the token definitions.
     pub result: u8,
 }
 
@@ -181,8 +177,7 @@ struct PluginQueryContractId {
 
 // Query Contract UI
 #[repr(C)]
-struct PluginQueryContractUi
-{
+struct PluginQueryContractUi {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
