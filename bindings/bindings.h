@@ -103,4 +103,3 @@
 #define HAVE_ECSCHNORR
 #define HAVE_IO_USB
 #include "eth_plugin_interface.h"
-#include "eth_internals.h"

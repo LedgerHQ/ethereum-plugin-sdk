@@ -3,19 +3,21 @@
 
 #define __ETH_PLUGIN_INTERFACE_H__
 
-#include "os.h"
-#include "cx.h"
+// #include "os.h"
+// #include "cx.h"
 #include "eth_internals.h"
 
 #define PLUGIN_ID_LENGTH 30
 
 // Interface version. To be updated everytime we introduce breaking changes to the plugin interface.
-typedef enum {
-    ETH_PLUGIN_INTERFACE_VERSION_1 = 1,  // Version 1
+typedef enum
+{
+    ETH_PLUGIN_INTERFACE_VERSION_1 = 1, // Version 1
     ETH_PLUGIN_INTERFACE_VERSION_LATEST = 2,
 } eth_plugin_interface_version_t;
 
-typedef enum {
+typedef enum
+{
 
     ETH_PLUGIN_INIT_CONTRACT = 0x0101,
     ETH_PLUGIN_PROVIDE_PARAMETER = 0x0102,
@@ -27,21 +29,23 @@ typedef enum {
 
 } eth_plugin_msg_t;
 
-typedef enum {
+typedef enum
+{
     // Unsuccesful return values
     ETH_PLUGIN_RESULT_ERROR = 0x00,
     ETH_PLUGIN_RESULT_UNAVAILABLE = 0x01,
-    ETH_PLUGIN_RESULT_UNSUCCESSFUL = 0x02,  // Used for comparison
+    ETH_PLUGIN_RESULT_UNSUCCESSFUL = 0x02, // Used for comparison
 
     // Successful return values
-    ETH_PLUGIN_RESULT_SUCCESSFUL = 0x03,  // Used for comparison
+    ETH_PLUGIN_RESULT_SUCCESSFUL = 0x03, // Used for comparison
     ETH_PLUGIN_RESULT_OK = 0x04,
     ETH_PLUGIN_RESULT_OK_ALIAS = 0x05,
     ETH_PLUGIN_RESULT_FALLBACK = 0x06
 
 } eth_plugin_result_t;
 
-typedef enum {
+typedef enum
+{
 
     ETH_UI_TYPE_AMOUNT_ADDRESS = 0x01,
     ETH_UI_TYPE_GENERIC = 0x02
@@ -52,21 +56,24 @@ typedef void (*PluginCall)(int, void *);
 
 // Shared objects, read-write
 
-typedef struct ethPluginSharedRW_t {
+typedef struct ethPluginSharedRW_t
+{
     cx_sha3_t *sha3;
 
 } ethPluginSharedRW_t;
 
 // Shared objects, read-only
 
-typedef struct ethPluginSharedRO_t {
+typedef struct ethPluginSharedRO_t
+{
     txContent_t *txContent;
 
 } ethPluginSharedRO_t;
 
 // Init Contract
 
-typedef struct ethPluginInitContract_t {
+typedef struct ethPluginInitContract_t
+{
     uint8_t interfaceVersion;
     uint8_t result;
 
@@ -75,20 +82,21 @@ typedef struct ethPluginInitContract_t {
     ethPluginSharedRO_t *pluginSharedRO;
     uint8_t *pluginContext;
     size_t pluginContextLength;
-    uint8_t *selector;  // 4 bytes selector
+    uint8_t *selector; // 4 bytes selector
     size_t dataSize;
 
-    char *alias;  // 29 bytes alias if ETH_PLUGIN_RESULT_OK_ALIAS set
+    char *alias; // 29 bytes alias if ETH_PLUGIN_RESULT_OK_ALIAS set
 
 } ethPluginInitContract_t;
 
 // Provide parameter
 
-typedef struct ethPluginProvideParameter_t {
+typedef struct ethPluginProvideParameter_t
+{
     ethPluginSharedRW_t *pluginSharedRW;
     ethPluginSharedRO_t *pluginSharedRO;
     uint8_t *pluginContext;
-    uint8_t *parameter;  // 32 bytes parameter
+    uint8_t *parameter; // 32 bytes parameter
     uint32_t parameterOffset;
 
     uint8_t result;
@@ -97,20 +105,21 @@ typedef struct ethPluginProvideParameter_t {
 
 // Finalize
 
-typedef struct ethPluginFinalize_t {
+typedef struct ethPluginFinalize_t
+{
     ethPluginSharedRW_t *pluginSharedRW;
     ethPluginSharedRO_t *pluginSharedRO;
     uint8_t *pluginContext;
 
-    uint8_t *tokenLookup1;  // set by the plugin if a token should be looked up
+    uint8_t *tokenLookup1; // set by the plugin if a token should be looked up
     uint8_t *tokenLookup2;
 
-    uint8_t *amount;   // set an uint256 pointer if uiType is UI_AMOUNT_ADDRESS
-    uint8_t *address;  // set to the destination address if uiType is UI_AMOUNT_ADDRESS. Set to the
-                       // user's address if uiType is UI_TYPE_GENERIC
+    uint8_t *amount;  // set an uint256 pointer if uiType is UI_AMOUNT_ADDRESS
+    uint8_t *address; // set to the destination address if uiType is UI_AMOUNT_ADDRESS. Set to the
+                      // user's address if uiType is UI_TYPE_GENERIC
 
     uint8_t uiType;
-    uint8_t numScreens;  // ignored if uiType is UI_AMOUNT_ADDRESS
+    uint8_t numScreens; // ignored if uiType is UI_AMOUNT_ADDRESS
     uint8_t result;
 
 } ethPluginFinalize_t;
@@ -125,16 +134,17 @@ typedef struct ethPluginFinalize_t {
 
 // Provide token
 
-typedef struct ethPluginProvideToken_t {
+typedef struct ethPluginProvideToken_t
+{
     ethPluginSharedRW_t *pluginSharedRW;
     ethPluginSharedRO_t *pluginSharedRO;
     uint8_t *pluginContext;
 
-    tokenDefinition_t *token1;  // set by the ETH application, to be saved by the plugin
+    tokenDefinition_t *token1; // set by the ETH application, to be saved by the plugin
     tokenDefinition_t *token2;
 
-    uint8_t additionalScreens;  // Used by the plugin if it needs to display additional screens
-                                // based on the information received from the token definitions.
+    uint8_t additionalScreens; // Used by the plugin if it needs to display additional screens
+                               // based on the information received from the token definitions.
 
     uint8_t result;
 
@@ -144,7 +154,8 @@ typedef struct ethPluginProvideToken_t {
 
 // This is always called on the non aliased contract
 
-typedef struct ethQueryContractID_t {
+typedef struct ethQueryContractID_t
+{
     ethPluginSharedRW_t *pluginSharedRW;
     ethPluginSharedRO_t *pluginSharedRO;
     uint8_t *pluginContext;
@@ -160,7 +171,8 @@ typedef struct ethQueryContractID_t {
 
 // Query Contract UI
 
-typedef struct ethQueryContractUI_t {
+typedef struct ethQueryContractUI_t
+{
     ethPluginSharedRW_t *pluginSharedRW;
     ethPluginSharedRO_t *pluginSharedRO;
     uint8_t *pluginContext;
