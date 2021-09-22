@@ -156,7 +156,7 @@ if __name__ == "__main__":
     ]
     nodes_to_extract = {
         "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SELECTOR_SIZE", "PARAMETER_LENGTH", "RUN_APPLICATION"],
-        "typedef enum": ["chain_kind_e"],
+        "typedef enum": [],
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
         "const": ["HEXDIGITS"],
