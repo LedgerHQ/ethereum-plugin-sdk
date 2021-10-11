@@ -157,7 +157,7 @@ if __name__ == "__main__":
     nodes_to_extract = {
         "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SELECTOR_SIZE", "PARAMETER_LENGTH", "RUN_APPLICATION"],
         "typedef enum": [],
-        "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "chain_config_s"],
+        "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
         "const": ["HEXDIGITS"],
         "fn": ["void getEthAddressStringFromBinary", "void getEthAddressFromKey", "void getEthDisplayableAddress", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString", "void u64_to_string"]

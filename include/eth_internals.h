@@ -48,12 +48,6 @@ typedef struct txContent_t {
     bool dataPresent;
 } txContent_t;
 
-typedef struct chain_config_s {
-    char coinName[10];  // ticker
-    uint64_t chainId;
-    chain_kind_t kind;
-} chain_config_t;
-
 __attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
     uint8_t *p = (uint8_t *) buf;
     for (size_t i = 0; i < n; ++i) {
