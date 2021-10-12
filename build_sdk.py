@@ -152,7 +152,7 @@ if __name__ == "__main__":
         "src_common/ethUstream.h",
         "src_common/ethUtils.h",
         "src/shared_context.h",
-        "src/eth_plugin_internal.h"
+        "src/eth_plugin_internal.h",
         "src/nft.h",
     ]
     nodes_to_extract = {
