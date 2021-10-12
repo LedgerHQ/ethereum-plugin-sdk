@@ -156,7 +156,7 @@ if __name__ == "__main__":
         "src/nft.h",
     ]
     nodes_to_extract = {
-        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SELECTOR_SIZE", "PARAMETER_LENGTH", "RUN_APPLICATION"],
+        "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SELECTOR_SIZE", "PARAMETER_LENGTH", "RUN_APPLICATION", "COLLECTION_NAME_MAX_LEN"],
         "typedef enum": [],
         "typedef struct": ["tokenDefinition_t", "txInt256_t", "txContent_t", "nftInfo_t"],
         "typedef union": ["extraInfo_t"],

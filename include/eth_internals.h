@@ -9,7 +9,7 @@
 
 #define MAX_TICKER_LEN 12  // 10 characters + ' ' + '\0'
 
-#define COLLECTION_NAME_MAX_LEN sizeof(tokenDefinition_t) - ADDRESS_LENGTH
+#define ADDRESS_LENGTH 20
 
 #define INT256_LENGTH 32
 
