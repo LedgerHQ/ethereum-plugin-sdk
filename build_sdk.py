@@ -149,11 +149,11 @@ if __name__ == "__main__":
         "src/tokens.h",
         "src/chainConfig.h",
         "src/utils.h",
-        "src/nft.h",
         "src_common/ethUstream.h",
         "src_common/ethUtils.h",
         "src/shared_context.h",
         "src/eth_plugin_internal.h"
+        "src/nft.h",
     ]
     nodes_to_extract = {
         "#define": ["MAX_TICKER_LEN", "ADDRESS_LENGTH", "INT256_LENGTH", "WEI_TO_ETHER", "SELECTOR_SIZE", "PARAMETER_LENGTH", "RUN_APPLICATION"],

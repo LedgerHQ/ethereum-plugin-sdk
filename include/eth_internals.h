@@ -9,7 +9,7 @@
 
 #define MAX_TICKER_LEN 12  // 10 characters + ' ' + '\0'
 
-#define ADDRESS_LENGTH 20
+#define COLLECTION_NAME_MAX_LEN sizeof(tokenDefinition_t) - ADDRESS_LENGTH
 
 #define INT256_LENGTH 32
 
@@ -47,6 +47,15 @@ typedef struct txContent_t {
     uint8_t vLength;
     bool dataPresent;
 } txContent_t;
+
+typedef struct nftInfo_t {
+    char nftCollectionName[COLLECTION_NAME_MAX_LEN];
+    char contractAddress[ADDRESS_LENGTH];
+} nftInfo_t;
+typedef union extraInfo_t {
+    tokenDefinition_t token;
+    nftInfo_t nft;
+} extraInfo_t;
 
 static __attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
     uint8_t *p = (uint8_t *) buf;
