@@ -21,6 +21,8 @@
 
 #define RUN_APPLICATION 1
 
+#define COLLECTION_NAME_MAX_LEN sizeof(tokenDefinition_t) - ADDRESS_LENGTH
+
 typedef struct tokenDefinition_t {
 #ifdef HAVE_CONTRACT_NAME_IN_DESCRIPTOR
     uint8_t contractName[ADDRESS_LENGTH];
@@ -28,6 +30,7 @@ typedef struct tokenDefinition_t {
     uint8_t address[ADDRESS_LENGTH];
     char ticker[MAX_TICKER_LEN];
     uint8_t decimals;
+    char scott_pad[20];
 } tokenDefinition_t;
 
 typedef struct txInt256_t {
