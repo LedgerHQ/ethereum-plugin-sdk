@@ -29,6 +29,9 @@ typedef struct tokenDefinition_t {
 #endif
     uint8_t address[ADDRESS_LENGTH];
     char ticker[MAX_TICKER_LEN];
+    char nft_pad[20];  // Adding some padding because the `nftInfo_t` is based on the size of a
+                       // `tokenDefinition_t`. By adding some padding here we give more space to the
+                       // collection name in the `nftInfo_t`. See `nftInfo_t` for more information.
     uint8_t decimals;
     char scott_pad[20];
 } tokenDefinition_t;
@@ -52,7 +55,7 @@ typedef struct txContent_t {
 } txContent_t;
 
 typedef struct nftInfo_t {
-    char nftCollectionName[COLLECTION_NAME_MAX_LEN];
+    char collectionName[COLLECTION_NAME_MAX_LEN];
     char contractAddress[ADDRESS_LENGTH];
 } nftInfo_t;
 typedef union extraInfo_t {
