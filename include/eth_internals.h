@@ -33,7 +33,6 @@ typedef struct tokenDefinition_t {
                        // `tokenDefinition_t`. By adding some padding here we give more space to the
                        // collection name in the `nftInfo_t`. See `nftInfo_t` for more information.
     uint8_t decimals;
-    char scott_pad[20];
 } tokenDefinition_t;
 
 typedef struct txInt256_t {
