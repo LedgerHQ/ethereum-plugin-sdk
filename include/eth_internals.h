@@ -48,7 +48,7 @@ typedef struct txContent_t {
     bool dataPresent;
 } txContent_t;
 
-__attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
+static __attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
     uint8_t *p = (uint8_t *) buf;
     for (size_t i = 0; i < n; ++i) {
         if (p[i]) {
