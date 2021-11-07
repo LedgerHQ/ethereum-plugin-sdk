@@ -103,3 +103,7 @@ void amountToString(const uint8_t *amount,
                     uint8_t out_buffer_size);
 
 void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
+
+void copy_address(uint8_t *dst, uint8_t *parameter, uint8_t dst_size);
+
+void copy_parameter(uint8_t *dst, uint8_t *parameter, uint8_t dst_size);

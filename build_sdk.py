@@ -162,7 +162,7 @@ if __name__ == "__main__":
         "typedef union": ["extraInfo_t"],
         "__attribute__((no_instrument_function)) inline": ["int allzeroes"],
         "const": ["HEXDIGITS"],
-        "fn": ["void getEthAddressStringFromBinary", "void getEthAddressFromKey", "void getEthDisplayableAddress", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString", "void u64_to_string"]
+        "fn": ["void getEthAddressStringFromBinary", "void getEthAddressFromKey", "void getEthDisplayableAddress", "bool adjustDecimals", "bool uint256_to_decimal", "void amountToString", "void u64_to_string", "void copy_address", "void copy_parameter"]
     }
     merge_headers(headers_to_merge, nodes_to_extract)
 
