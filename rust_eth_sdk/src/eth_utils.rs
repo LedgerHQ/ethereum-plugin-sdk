@@ -11,6 +11,12 @@ impl From<*const u8> for Address {
     }
 }
 
+impl Address {
+    pub fn to_str(&self, dst: *mut u8, dst_len: u8) {
+        unimplemented!();
+    }
+}
+
 #[derive(Default)]
 pub struct Number([u8; INT256_LENGTH]);
 
