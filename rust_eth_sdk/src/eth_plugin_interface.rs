@@ -7,7 +7,7 @@ pub const MAX_TICKER_LEN: usize = 12; // 10 characters + ' ' + '\0'
 pub const ADDRESS_LENGTH: usize = 20;
 pub const INT256_LENGTH: usize = 32;
 pub const WEI_TO_ETHER: u8 = 18;
-pub const SELECTOR_SIZE: u8 = 4;
+pub const SELECTOR_SIZE: usize = 4;
 pub const PARAMETER_LENGTH: usize = 32;
 
 #[repr(u8)]
@@ -17,6 +17,7 @@ pub enum EthereumArg {
 
 /// Interface version. To be updated everytime we introduce breaking changes to the plugin interface.
 #[repr(u8)]
+#[derive(PartialEq, Eq)]
 pub enum PluginInterfaceVersion {
     Version1 = 1,
     Latest = 2,
@@ -31,6 +32,17 @@ pub enum PluginMsg {
     QueryId = 261,
     QueryUi = 262,
     CheckPresence = 511,
+}
+
+impl From<u32> for PluginMsg {
+    fn from(src: u32) -> Self {
+        let res;
+        // This will introduce undefined behaviour for invalid `src`. Not sure we want to keep it.
+        unsafe {
+            res = core::mem::transmute(src as u16);
+        }
+        res
+    }
 }
 
 #[repr(u8)]
@@ -92,19 +104,27 @@ pub struct PluginSharedRO {
     pub txContent: *mut txContent_t,
 }
 
+pub struct PluginCheckPresence;
+
+impl PluginCheckPresence {
+    pub fn new() -> Self {
+        Self
+    }
+}
+
 /// Init Contract
 #[repr(C)]
 pub struct PluginInitContract {
     pub interfaceVersion: PluginInterfaceVersion,
-    pub result: u8,
+    pub result: PluginResult,
 
     // in
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
-    pub pluginContextLength: u32,
+    pub pluginContextLength: usize,
     pub selector: *mut u8, // 4 bytes selector
-    pub dataSize: u32,
+    pub dataSize: usize,
 
     pub alias: *mut i8, // 29 bytes alias if ETH_PLUGIN_RESULT_OK_ALIAS set
 }
@@ -116,8 +136,8 @@ pub struct PluginProvideParameter {
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
     pub parameter: *mut u8, // 32 bytes parameter
-    pub parameterOffset: u32,
-    pub result: u8,
+    pub parameterOffset: usize,
+    pub result: PluginResult,
 }
 
 /// Finalize
@@ -135,7 +155,7 @@ pub struct PluginFinalize {
     // user's address if uiType is UI_TYPE_GENERIC
     pub uiType: UiType,
     pub numScreens: u8, // ignored if uiType is UI_AMOUNT_ADDRESS
-    pub result: u8,
+    pub result: PluginResult,
 }
 
 // If uiType is UI_AMOUNT_ADDRESS, the amount and address provided by the plugin will be used
@@ -158,7 +178,7 @@ pub struct PluginProvideToken {
 
     pub additionalScreens: u8, // Used by the plugin if it needs to display additional screens
     // based on the information received from the token definitions.
-    pub result: u8,
+    pub result: PluginResult,
 }
 
 // Query Contract name and version
@@ -170,11 +190,11 @@ pub struct PluginQueryContractId {
     pub pluginContext: *mut u8,
 
     pub name: *mut i8,
-    pub nameLength: u32,
+    pub nameLength: usize,
     pub version: *mut i8,
-    pub versionLength: u32,
+    pub versionLength: usize,
 
-    pub result: u8,
+    pub result: PluginResult,
 }
 
 // Query Contract UI
@@ -185,8 +205,21 @@ pub struct PluginQueryContractUi {
     pub pluginContext: *mut u8,
     pub screenIndex: u8,
     pub title: *mut i8,
-    pub titleLength: u32,
+    pub titleLength: usize,
     pub msg: *mut i8,
-    pub msgLength: u32,
-    pub result: u8,
+    pub msgLength: usize,
+    pub result: PluginResult,
 }
+
+pub trait FromPtr {
+    fn from_ptr<'a>(addr: *mut u8) -> &'a mut Self
+    where
+        Self: Sized,
+    {
+        unsafe { &mut *(addr as *mut Self) }
+    }
+}
+
+impl FromPtr for PluginInitContract {}
+impl FromPtr for PluginProvideParameter {}
+impl FromPtr for PluginFinalize {}
