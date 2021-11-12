@@ -215,6 +215,10 @@ pub trait FromPtr {
     }
 }
 
+// Should we macro this?
 impl FromPtr for PluginInitContract {}
 impl FromPtr for PluginProvideParameter {}
 impl FromPtr for PluginFinalize {}
+impl FromPtr for PluginProvideToken {}
+impl FromPtr for PluginQueryContractId {}
+impl FromPtr for PluginQueryContractUi {}
