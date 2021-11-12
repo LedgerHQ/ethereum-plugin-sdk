@@ -1,10 +1,24 @@
+use core::ops::Add;
+
 use crate::eth_plugin_interface::{ADDRESS_LENGTH, INT256_LENGTH};
 
 #[derive(Default, PartialEq, Eq)]
 pub struct Address([u8; ADDRESS_LENGTH]);
 
+impl From<*const u8> for Address {
+    fn from(_: *const u8) -> Self {
+        unimplemented!();
+    }
+}
+
 #[derive(Default)]
 pub struct Number([u8; INT256_LENGTH]);
+
+impl From<*const u8> for Number {
+    fn from(_: *const u8) -> Self {
+        unimplemented!();
+    }
+}
 
 impl Number {
     fn to_amount(&self, dst: &mut str, ticker: &str, decimals: u8) {

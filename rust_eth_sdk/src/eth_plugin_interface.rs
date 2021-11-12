@@ -130,7 +130,7 @@ pub struct PluginProvideParameter {
     pub ethPluginSharedRW_t: *mut PluginSharedRW,
     pub ethPluginSharedRO_t: *mut PluginSharedRO,
     pub pluginContext: *mut u8,
-    pub parameter: *mut u8, // 32 bytes parameter
+    pub parameter: *const u8, // 32 bytes parameter
     pub parameterOffset: usize,
     pub result: PluginResult,
 }
