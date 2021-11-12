@@ -104,13 +104,8 @@ pub struct PluginSharedRO {
     pub txContent: *mut txContent_t,
 }
 
+#[derive(Default)]
 pub struct PluginCheckPresence;
-
-impl PluginCheckPresence {
-    pub fn new() -> Self {
-        Self
-    }
-}
 
 /// Init Contract
 #[repr(C)]
