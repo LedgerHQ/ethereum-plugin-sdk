@@ -21,6 +21,8 @@ impl From<*const u8> for Number {
 }
 
 impl Number {
+    /// Transforms the number to a string that is prefixed with the ticker and decimal adjusted, e.g.
+    /// `ETH 1.337` and copies it to `dst`.
     fn to_amount(&self, dst: *mut u8, dst_len: u8, ticker: &str, decimals: u8) {
         // We could use a simple `amountToString` if we create the bindings
         // need to be careful because ticker is not necessarily null terminated?
@@ -28,6 +30,7 @@ impl Number {
         unimplemented!()
     }
 
+    /// Transforms the number to its string representation and copies the string to `dst`.
     fn to_str(&self, dst: *mut u8, dst_len: u8) {
         // We could use `uint256_to_decimal` if we create the bindings
         // need to transform dst to Cstring ?
