@@ -12,6 +12,7 @@ impl From<*const u8> for Address {
 }
 
 impl Address {
+    /// Transforms the address to a string prefixed with 0x (e.g. 0xa123b....);
     pub fn to_str(&self, dst: *mut u8, dst_len: u8) {
         unimplemented!();
     }
