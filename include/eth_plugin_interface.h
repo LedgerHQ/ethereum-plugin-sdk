@@ -9,7 +9,7 @@
 
 // Interface version. To be updated everytime we introduce breaking changes to the plugin interface.
 typedef enum {
-    ETH_PLUGIN_INTERFACE_VERSION_1 = 1,  // Version 1
+    ETH_PLUGIN_INTERFACE_VERSION_1 = 1,
     ETH_PLUGIN_INTERFACE_VERSION_2 = 2,
     ETH_PLUGIN_INTERFACE_VERSION_3 = 3,
     ETH_PLUGIN_INTERFACE_VERSION_LATEST = 4,
@@ -165,9 +165,9 @@ typedef struct ethQueryContractUI_t {
     ethPluginSharedRO_t *pluginSharedRO;
     union extraInfo_t *item1;
     union extraInfo_t *item2;
+    char network_ticker[MAX_TICKER_LEN];
     uint8_t *pluginContext;
     uint8_t screenIndex;
-    char network_ticker[MAX_TICKER_LEN];
 
     char *title;
     size_t titleLength;
