@@ -21,12 +21,17 @@
 
 #define RUN_APPLICATION 1
 
+#define COLLECTION_NAME_MAX_LEN sizeof(tokenDefinition_t) - ADDRESS_LENGTH
+
 typedef struct tokenDefinition_t {
 #ifdef HAVE_CONTRACT_NAME_IN_DESCRIPTOR
     uint8_t contractName[ADDRESS_LENGTH];
 #endif
     uint8_t address[ADDRESS_LENGTH];
     char ticker[MAX_TICKER_LEN];
+    char nft_pad[20];  // Adding some padding because the `nftInfo_t` is based on the size of a
+                       // `tokenDefinition_t`. By adding some padding here we give more space to the
+                       // collection name in the `nftInfo_t`. See `nftInfo_t` for more information.
     uint8_t decimals;
 } tokenDefinition_t;
 
@@ -47,6 +52,15 @@ typedef struct txContent_t {
     uint8_t vLength;
     bool dataPresent;
 } txContent_t;
+
+typedef struct nftInfo_t {
+    char collectionName[COLLECTION_NAME_MAX_LEN];
+    char contractAddress[ADDRESS_LENGTH];
+} nftInfo_t;
+typedef union extraInfo_t {
+    tokenDefinition_t token;
+    nftInfo_t nft;
+} extraInfo_t;
 
 static __attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
     uint8_t *p = (uint8_t *) buf;
@@ -89,3 +103,7 @@ void amountToString(const uint8_t *amount,
                     uint8_t out_buffer_size);
 
 void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
+
+void copy_address(uint8_t *dst, uint8_t *parameter, uint8_t dst_size);
+
+void copy_parameter(uint8_t *dst, uint8_t *parameter, uint8_t dst_size);
