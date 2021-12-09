@@ -246,3 +246,13 @@ void u64_to_string(uint64_t src, char *dst, uint8_t dst_size) {
         j++;
     }
 }
+
+void copy_address(uint8_t *dst, uint8_t *parameter, uint8_t dst_size) {
+    uint8_t copy_size = MIN(dst_size, ADDRESS_LENGTH);
+    memmove(dst, parameter + PARAMETER_LENGTH - copy_size, copy_size);
+}
+
+void copy_parameter(uint8_t *dst, uint8_t *parameter, uint8_t dst_size) {
+    uint8_t copy_size = MIN(dst_size, PARAMETER_LENGTH);
+    memmove(dst, parameter, copy_size);
+}

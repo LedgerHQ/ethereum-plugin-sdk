@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 '''
 This script extract a few specific definitions from app-ethereum that are
 required to exchange information with ethereum external plugins.
@@ -172,6 +174,7 @@ if __name__ == "__main__":
     # extract and merge function bodies
     c_files_to_merge = [
         "src/utils.c",
-        "src_common/ethUtils.c"
+        "src_common/ethUtils.c",
+        "src/eth_plugin_internal.c"
     ]
     merge_c_files(c_files_to_merge, nodes_to_extract["fn"])
