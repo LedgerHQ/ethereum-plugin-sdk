@@ -21,7 +21,7 @@
 
 #define RUN_APPLICATION 1
 
-#define COLLECTION_NAME_MAX_LEN sizeof(tokenDefinition_t) - ADDRESS_LENGTH
+#define COLLECTION_NAME_MAX_LEN (sizeof(tokenDefinition_t) - ADDRESS_LENGTH)
 
 typedef struct tokenDefinition_t {
 #ifdef HAVE_CONTRACT_NAME_IN_DESCRIPTOR
