@@ -81,10 +81,10 @@ void getEthDisplayableAddress(uint8_t *in,
     getEthAddressStringFromBinary(in, out + 2, sha3, chainId);
 }
 
-bool adjustDecimals(char *src,
-                    uint32_t srcLength,
+bool adjustDecimals(const char *src,
+                    size_t srcLength,
                     char *target,
-                    uint32_t targetLength,
+                    size_t targetLength,
                     uint8_t decimals) {
     uint32_t startOffset;
     uint32_t lastZeroOffset = 0;
@@ -196,7 +196,7 @@ void amountToString(const uint8_t *amount,
                     uint8_t decimals,
                     const char *ticker,
                     char *out_buffer,
-                    uint8_t out_buffer_size) {
+                    size_t out_buffer_size) {
     char tmp_buffer[100] = {0};
 
     if (uint256_to_decimal(amount, amount_size, tmp_buffer, sizeof(tmp_buffer)) == false) {

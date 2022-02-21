@@ -21,7 +21,7 @@
 
 #define RUN_APPLICATION 1
 
-#define COLLECTION_NAME_MAX_LEN sizeof(tokenDefinition_t) - ADDRESS_LENGTH
+#define COLLECTION_NAME_MAX_LEN (sizeof(tokenDefinition_t) - ADDRESS_LENGTH)
 
 typedef struct tokenDefinition_t {
 #ifdef HAVE_CONTRACT_NAME_IN_DESCRIPTOR
@@ -87,10 +87,10 @@ void getEthDisplayableAddress(uint8_t *in,
                               cx_sha3_t *sha3,
                               uint64_t chainId);
 
-bool adjustDecimals(char *src,
-                    uint32_t srcLength,
+bool adjustDecimals(const char *src,
+                    size_t srcLength,
                     char *target,
-                    uint32_t targetLength,
+                    size_t targetLength,
                     uint8_t decimals);
 
 bool uint256_to_decimal(const uint8_t *value, size_t value_len, char *out, size_t out_len);
@@ -100,7 +100,7 @@ void amountToString(const uint8_t *amount,
                     uint8_t decimals,
                     const char *ticker,
                     char *out_buffer,
-                    uint8_t out_buffer_size);
+                    size_t out_buffer_size);
 
 void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
 
