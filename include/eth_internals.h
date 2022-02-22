@@ -87,10 +87,10 @@ void getEthDisplayableAddress(uint8_t *in,
                               cx_sha3_t *sha3,
                               uint64_t chainId);
 
-bool adjustDecimals(char *src,
-                    uint32_t srcLength,
+bool adjustDecimals(const char *src,
+                    size_t srcLength,
                     char *target,
-                    uint32_t targetLength,
+                    size_t targetLength,
                     uint8_t decimals);
 
 bool uint256_to_decimal(const uint8_t *value, size_t value_len, char *out, size_t out_len);
@@ -100,10 +100,10 @@ void amountToString(const uint8_t *amount,
                     uint8_t decimals,
                     const char *ticker,
                     char *out_buffer,
-                    uint8_t out_buffer_size);
+                    size_t out_buffer_size);
 
 void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
 
-void copy_address(uint8_t *dst, uint8_t *parameter, uint8_t dst_size);
+void copy_address(uint8_t *dst, const uint8_t *parameter, uint8_t dst_size);
 
-void copy_parameter(uint8_t *dst, uint8_t *parameter, uint8_t dst_size);
+void copy_parameter(uint8_t *dst, const uint8_t *parameter, uint8_t dst_size);
