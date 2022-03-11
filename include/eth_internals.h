@@ -11,15 +11,15 @@
 
 #define ADDRESS_LENGTH 20
 
-#define INT256_LENGTH 32
+#define INT256_LENGTH  32
 
 #define WEI_TO_ETHER 18
 
-#define SELECTOR_SIZE 4
+#define SELECTOR_SIZE    4
 
 #define PARAMETER_LENGTH 32
 
-#define RUN_APPLICATION 1
+#define RUN_APPLICATION  1
 
 #define COLLECTION_NAME_MAX_LEN (sizeof(tokenDefinition_t) - ADDRESS_LENGTH)
 
@@ -93,17 +93,17 @@ bool adjustDecimals(const char *src,
                     size_t targetLength,
                     uint8_t decimals);
 
-bool uint256_to_decimal(const uint8_t *value, size_t value_len, char *out, size_t out_len);
+bool uint256_to_decimal(const uint8_t* value, size_t value_len, char* out, size_t out_len);
 
-void amountToString(const uint8_t *amount,
+void amountToString(const uint8_t* amount,
                     uint8_t amount_len,
                     uint8_t decimals,
-                    const char *ticker,
-                    char *out_buffer,
+                    const char* ticker,
+                    char* out_buffer,
                     size_t out_buffer_size);
 
 void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
 
-void copy_address(uint8_t *dst, const uint8_t *parameter, uint8_t dst_size);
+void copy_address(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
 
-void copy_parameter(uint8_t *dst, const uint8_t *parameter, uint8_t dst_size);
+void copy_parameter(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
