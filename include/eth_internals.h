@@ -21,17 +21,14 @@
 
 #define RUN_APPLICATION  1
 
-#define COLLECTION_NAME_MAX_LEN (sizeof(tokenDefinition_t) - ADDRESS_LENGTH)
+#define COLLECTION_NAME_MAX_LEN 70
 
 typedef struct tokenDefinition_t {
+    uint8_t address[ADDRESS_LENGTH];  // must be first item
 #ifdef HAVE_CONTRACT_NAME_IN_DESCRIPTOR
     uint8_t contractName[ADDRESS_LENGTH];
 #endif
-    uint8_t address[ADDRESS_LENGTH];
     char ticker[MAX_TICKER_LEN];
-    char nft_pad[20];  // Adding some padding because the `nftInfo_t` is based on the size of a
-                       // `tokenDefinition_t`. By adding some padding here we give more space to the
-                       // collection name in the `nftInfo_t`. See `nftInfo_t` for more information.
     uint8_t decimals;
 } tokenDefinition_t;
 
@@ -54,9 +51,10 @@ typedef struct txContent_t {
 } txContent_t;
 
 typedef struct nftInfo_t {
-    char collectionName[COLLECTION_NAME_MAX_LEN];
-    char contractAddress[ADDRESS_LENGTH];
+    uint8_t contractAddress[ADDRESS_LENGTH];  // must be first item
+    char collectionName[COLLECTION_NAME_MAX_LEN + 1];
 } nftInfo_t;
+
 typedef union extraInfo_t {
     tokenDefinition_t token;
     nftInfo_t nft;

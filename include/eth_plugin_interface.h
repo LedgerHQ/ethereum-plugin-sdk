@@ -1,7 +1,6 @@
 /* This file is auto-generated, don't edit it */
-#ifndef __ETH_PLUGIN_INTERFACE_H__
-
-#define __ETH_PLUGIN_INTERFACE_H__
+#ifndef _ETH_PLUGIN_INTERFACE_H_
+#define _ETH_PLUGIN_INTERFACE_H_
 
 #include "os.h"
 #include "cx.h"
@@ -12,7 +11,8 @@ typedef enum {
     ETH_PLUGIN_INTERFACE_VERSION_1 = 1,
     ETH_PLUGIN_INTERFACE_VERSION_2 = 2,
     ETH_PLUGIN_INTERFACE_VERSION_3 = 3,
-    ETH_PLUGIN_INTERFACE_VERSION_LATEST = 4,
+    ETH_PLUGIN_INTERFACE_VERSION_4 = 4,
+    ETH_PLUGIN_INTERFACE_VERSION_LATEST = 5,
 } eth_plugin_interface_version_t;
 
 typedef enum {
@@ -178,4 +178,4 @@ typedef struct ethQueryContractUI_t {
 
 } ethQueryContractUI_t;
 
-#endif
+#endif  // _ETH_PLUGIN_INTERFACE_H_
