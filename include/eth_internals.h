@@ -60,7 +60,7 @@ typedef union extraInfo_t {
     nftInfo_t nft;
 } extraInfo_t;
 
-static __attribute__((no_instrument_function)) inline int allzeroes(void *buf, size_t n) {
+static __attribute__((no_instrument_function)) inline int allzeroes(const void *buf, size_t n) {
     uint8_t *p = (uint8_t *) buf;
     for (size_t i = 0; i < n; ++i) {
         if (p[i]) {
@@ -105,3 +105,7 @@ void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
 void copy_address(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
 
 void copy_parameter(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
+
+bool U2BE_from_parameter(const uint8_t* parameter, uint16_t* value);
+
+bool U4BE_from_parameter(const uint8_t* parameter, uint32_t* value);
