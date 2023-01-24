@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define MAX_TICKER_LEN 12  // 10 characters + ' ' + '\0'
+#define MAX_TICKER_LEN 11  // 10 characters + '\0'
 
 #define ADDRESS_LENGTH 20
 
