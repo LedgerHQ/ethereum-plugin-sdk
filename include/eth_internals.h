@@ -2,10 +2,13 @@
 
 #pragma once
 
-#include "os.h"
-#include "cx.h"
 #include <stdbool.h>
 #include <string.h>
+#include "os.h"
+#include "cx.h"
+#ifdef HAVE_NBGL
+#include "nbgl_types.h"
+#endif
 
 #define MAX_TICKER_LEN 11  // 10 characters + '\0'
 
@@ -19,7 +22,7 @@
 
 #define PARAMETER_LENGTH 32
 
-#define RUN_APPLICATION  1
+#define RUN_APPLICATION 1
 
 #define COLLECTION_NAME_MAX_LEN 70
 
@@ -54,6 +57,14 @@ typedef struct nftInfo_t {
     uint8_t contractAddress[ADDRESS_LENGTH];  // must be first item
     char collectionName[COLLECTION_NAME_MAX_LEN + 1];
 } nftInfo_t;
+
+typedef struct caller_app_t {
+    const char *name;
+#ifdef HAVE_NBGL
+    const nbgl_icon_details_t *icon;
+#endif
+    char type;  // does not have to be set by the caller app
+} caller_app_t;
 
 typedef union extraInfo_t {
     tokenDefinition_t token;
