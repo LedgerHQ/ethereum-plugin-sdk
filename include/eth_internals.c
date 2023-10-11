@@ -2,7 +2,7 @@
 
 #include "eth_internals.h"
 
-void getEthAddressStringFromBinary(uint8_t *address,
+bool getEthAddressStringFromBinary(uint8_t *address,
                                    char *out,
                                    cx_sha3_t *sha3Context,
                                    uint64_t chainId) {
@@ -22,7 +22,9 @@ void getEthAddressStringFromBinary(uint8_t *address,
             break;
     }
     if (eip1191) {
-        u64_to_string(chainId, (char *) locals_union.tmp, sizeof(locals_union.tmp));
+        if (!u64_to_string(chainId, (char *) locals_union.tmp, sizeof(locals_union.tmp))) {
+            return false;
+        }
         offset = strnlen((char *) locals_union.tmp, sizeof(locals_union.tmp));
         strlcat((char *) locals_union.tmp + offset, "0x", sizeof(locals_union.tmp) - offset);
         offset = strnlen((char *) locals_union.tmp, sizeof(locals_union.tmp));
@@ -32,13 +34,18 @@ void getEthAddressStringFromBinary(uint8_t *address,
         locals_union.tmp[offset + 2 * i] = HEXDIGITS[(digit >> 4) & 0x0f];
         locals_union.tmp[offset + 2 * i + 1] = HEXDIGITS[digit & 0x0f];
     }
-    cx_keccak_init(sha3Context, 256);
-    cx_hash((cx_hash_t *) sha3Context,
-            CX_LAST,
-            locals_union.tmp,
-            offset + 40,
-            locals_union.hashChecksum,
-            32);
+    if (cx_keccak_init_no_throw(sha3Context, 256) != CX_OK) {
+        return false;
+    }
+
+    if (cx_hash_no_throw((cx_hash_t *) sha3Context,
+                         CX_LAST,
+                         locals_union.tmp,
+                         offset + 40,
+                         locals_union.hashChecksum,
+                         32) != CX_OK) {
+        return false;
+    }
     for (i = 0; i < 40; i++) {
         uint8_t digit = address[i / 2];
         if ((i % 2) == 0) {
@@ -58,27 +65,47 @@ void getEthAddressStringFromBinary(uint8_t *address,
         }
     }
     out[40] = '\0';
+
+    return true;
 }
 
-void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out, cx_sha3_t *sha3Context) {
+bool getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out, cx_sha3_t *sha3Context) {
     uint8_t hashAddress[INT256_LENGTH];
-    cx_keccak_init(sha3Context, 256);
-    cx_hash((cx_hash_t *) sha3Context, CX_LAST, publicKey->W + 1, 64, hashAddress, 32);
+
+    if (cx_keccak_init_no_throw(sha3Context, 256) != CX_OK) {
+        return false;
+    }
+
+    if (cx_hash_no_throw((cx_hash_t *) sha3Context,
+                         CX_LAST,
+                         publicKey->W + 1,
+                         64,
+                         hashAddress,
+                         32) != CX_OK) {
+        return false;
+    }
+
     memmove(out, hashAddress + 12, 20);
+    return true;
 }
 
-void getEthDisplayableAddress(uint8_t *in,
+bool getEthDisplayableAddress(uint8_t *in,
                               char *out,
                               size_t out_len,
                               cx_sha3_t *sha3,
                               uint64_t chainId) {
     if (out_len < 43) {
         strlcpy(out, "ERROR", out_len);
-        return;
+        return false;
     }
     out[0] = '0';
     out[1] = 'x';
-    getEthAddressStringFromBinary(in, out + 2, sha3, chainId);
+    if (!getEthAddressStringFromBinary(in, out + 2, sha3, chainId)) {
+        strlcpy(out, "ERROR", out_len);
+        return false;
+    }
+
+    return true;
 }
 
 bool adjustDecimals(const char *src,
@@ -191,7 +218,7 @@ bool uint256_to_decimal(const uint8_t *value, size_t value_len, char *out, size_
     return true;
 }
 
-void amountToString(const uint8_t *amount,
+bool amountToString(const uint8_t *amount,
                     uint8_t amount_size,
                     uint8_t decimals,
                     const char *ticker,
@@ -200,7 +227,7 @@ void amountToString(const uint8_t *amount,
     char tmp_buffer[100] = {0};
 
     if (uint256_to_decimal(amount, amount_size, tmp_buffer, sizeof(tmp_buffer)) == false) {
-        THROW(EXCEPTION_OVERFLOW);
+        return false;
     }
 
     uint8_t amount_len = strnlen(tmp_buffer, sizeof(tmp_buffer));
@@ -216,19 +243,20 @@ void amountToString(const uint8_t *amount,
                        out_buffer + ticker_len,
                        out_buffer_size - ticker_len - 1,
                        decimals) == false) {
-        THROW(EXCEPTION_OVERFLOW);
+        return false;
     }
 
     out_buffer[out_buffer_size - 1] = '\0';
+    return true;
 }
 
-void u64_to_string(uint64_t src, char *dst, uint8_t dst_size) {
+bool u64_to_string(uint64_t src, char *dst, uint8_t dst_size) {
     // Copy the numbers in ASCII format.
     uint8_t i = 0;
     do {
         // Checking `i + 1` to make sure we have enough space for '\0'.
         if (i + 1 >= dst_size) {
-            THROW(0x6502);
+            return false;
         }
         dst[i] = src % 10 + '0';
         src /= 10;
@@ -248,6 +276,7 @@ void u64_to_string(uint64_t src, char *dst, uint8_t dst_size) {
         i--;
         j++;
     }
+    return true;
 }
 
 void copy_address(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size) {

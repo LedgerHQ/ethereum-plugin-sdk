@@ -8,6 +8,7 @@
 #include "cx.h"
 #ifdef HAVE_NBGL
 #include "nbgl_types.h"
+#include "glyphs.h"
 #endif
 
 #define MAX_TICKER_LEN 11  // 10 characters + '\0'
@@ -83,14 +84,14 @@ static __attribute__((no_instrument_function)) inline int allzeroes(const void *
 
 static const char HEXDIGITS[] = "0123456789abcdef";
 
-void getEthAddressStringFromBinary(uint8_t *address,
+bool getEthAddressStringFromBinary(uint8_t *address,
                                    char *out,
                                    cx_sha3_t *sha3Context,
                                    uint64_t chainId);
 
-void getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out, cx_sha3_t *sha3Context);
+bool getEthAddressFromKey(cx_ecfp_public_key_t *publicKey, uint8_t *out, cx_sha3_t *sha3Context);
 
-void getEthDisplayableAddress(uint8_t *in,
+bool getEthDisplayableAddress(uint8_t *in,
                               char *out,
                               size_t out_len,
                               cx_sha3_t *sha3,
@@ -104,14 +105,14 @@ bool adjustDecimals(const char *src,
 
 bool uint256_to_decimal(const uint8_t* value, size_t value_len, char* out, size_t out_len);
 
-void amountToString(const uint8_t* amount,
+bool amountToString(const uint8_t* amount,
                     uint8_t amount_len,
                     uint8_t decimals,
                     const char* ticker,
                     char* out_buffer,
                     size_t out_buffer_size);
 
-void u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
+bool u64_to_string(uint64_t src, char *dst, uint8_t dst_size);
 
 void copy_address(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
 
