@@ -1,6 +1,6 @@
-/*****************************************************************************
- *   Ledger Plugin SDK
- *   (c) 2023 Ledger SAS
+/*******************************************************************************
+ *   Ledger Ethereum App
+ *   (c) 2016-2019 Ledger
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -13,16 +13,22 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *****************************************************************************/
+ ********************************************************************************/
 
-#include "plugin_utils.h"
+#pragma once
 
-bool find_selector(uint32_t selector, const uint32_t *array, size_t size, size_t *idx) {
-    for (size_t i = 0; i < size; ++i) {
-        if (selector == array[i]) {
-            if (idx != NULL) *idx = i;
-            return true;
-        }
-    }
-    return false;
-}
+#ifdef HAVE_NBGL
+#include "ux.h"
+#endif
+
+typedef enum { CALLER_TYPE_CLONE, CALLER_TYPE_PLUGIN } e_caller_type;
+
+typedef struct caller_app_t {
+    const char *name;
+#ifdef HAVE_NBGL
+    const nbgl_icon_details_t *icon;
+#endif
+    char type;  // does not have to be set by the caller app
+} caller_app_t;
+
+extern caller_app_t *caller_app;
