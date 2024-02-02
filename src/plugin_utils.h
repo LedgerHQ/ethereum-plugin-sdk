@@ -1,5 +1,5 @@
 /*****************************************************************************
- *   Ledger Plugin SDK
+ *   Ledger
  *   (c) 2023 Ledger SAS
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +15,23 @@
  *  limitations under the License.
  *****************************************************************************/
 
-#ifndef UTILS_H_
-#define UTILS_H_
+#pragma once
 
-#include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-bool find_selector(uint32_t selector, const uint32_t *array, size_t size, size_t *idx);
+#include "eth_plugin_interface.h"
 
-#endif  // UTILS_H_
+#define SELECTOR_SIZE    4
+#define PARAMETER_LENGTH 32
+
+void copy_address(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
+
+void copy_parameter(uint8_t* dst, const uint8_t* parameter, uint8_t dst_size);
+
+// Get the value from the beginning of the parameter (right to left) and check if the rest of it is
+// zero
+bool U2BE_from_parameter(const uint8_t* parameter, uint16_t* value);
+bool U4BE_from_parameter(const uint8_t* parameter, uint32_t* value);
+
+bool find_selector(uint32_t selector, const uint32_t* array, size_t size, size_t* idx);
