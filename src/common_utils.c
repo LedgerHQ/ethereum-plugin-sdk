@@ -235,7 +235,7 @@ void getEthAddressFromRawKey(const uint8_t raw_pubkey[static 65],
 }
 
 void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
-                                   char out[static ADDRESS_LENGTH * 2],
+                                   char out[static (ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId) {
     uint8_t hashAddress[CX_KECCAK_256_SIZE];
     CX_ASSERT(cx_keccak_256_hash(raw_pubkey + 1, 64, hashAddress));
@@ -243,7 +243,7 @@ void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
 }
 
 bool getEthAddressStringFromBinary(uint8_t *address,
-                                   char out[static ADDRESS_LENGTH * 2],
+                                   char out[static (ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId) {
     // save some precious stack space
     union locals_union {
@@ -295,7 +295,7 @@ bool getEthAddressStringFromBinary(uint8_t *address,
             }
         }
     }
-    out[40] = '\0';
+    out[ADDRESS_LENGTH * 2] = '\0';
 
     return true;
 }
