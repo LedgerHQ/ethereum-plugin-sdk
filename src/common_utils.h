@@ -22,6 +22,7 @@
 
 #include "os.h"
 #include "cx.h"
+#include "format.h"
 
 #define WEI_TO_ETHER 18
 
@@ -35,7 +36,15 @@ static const char HEXDIGITS[] = "0123456789abcdef";
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
-void array_hexstr(char *strbuf, const void *bin, unsigned int len);
+/**
+ * @deprecated
+ * See format_hex in SDK
+ */
+DEPRECATED static inline void array_hexstr(char *strbuf, const void *bin, unsigned int len)
+{
+    // Consider the output buffer is sufficiently large!
+    format_hex(bin, len, strbuf, (2 * len + 1));
+}
 
 uint64_t u64_from_BE(const uint8_t *in, uint8_t size);
 

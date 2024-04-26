@@ -23,15 +23,6 @@
 #include "lcx_ecfp.h"
 #include "lcx_sha3.h"
 
-void array_hexstr(char *strbuf, const void *bin, unsigned int len) {
-    while (len--) {
-        *strbuf++ = HEXDIGITS[((*((char *) bin)) >> 4) & 0xF];
-        *strbuf++ = HEXDIGITS[(*((char *) bin)) & 0xF];
-        bin = (const void *) ((unsigned int) bin + 1);
-    }
-    *strbuf = 0;  // EOS
-}
-
 uint64_t u64_from_BE(const uint8_t *in, uint8_t size) {
     uint8_t i = 0;
     uint64_t res = 0;
