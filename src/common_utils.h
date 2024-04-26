@@ -46,6 +46,8 @@ DEPRECATED static inline void array_hexstr(char *strbuf, const void *bin, unsign
     format_hex(bin, len, strbuf, (2 * len + 1));
 }
 
+int array_bytes_string(char *out, size_t outl, const void *value, size_t len);
+
 uint64_t u64_from_BE(const uint8_t *in, uint8_t size);
 
 bool u64_to_string(uint64_t src, char *dst, uint8_t dst_size);

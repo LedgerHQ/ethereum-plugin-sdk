@@ -23,6 +23,23 @@
 #include "lcx_ecfp.h"
 #include "lcx_sha3.h"
 
+int array_bytes_string(char *out, size_t outl, const void *value, size_t len) {
+    if (outl <= 2) {
+        // Need at least '0x' and 1 digit
+        return -1;
+    }
+    if (strlcpy(out, "0x", outl) != 2) {
+        goto err;
+    }
+    if (format_hex(value, len, out + 2, outl - 2) < 0) {
+        goto err;
+    }
+    return 0;
+err:
+    *out = '\0';
+    return -1;
+}
+
 uint64_t u64_from_BE(const uint8_t *in, uint8_t size) {
     uint8_t i = 0;
     uint64_t res = 0;
