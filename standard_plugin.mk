@@ -25,6 +25,7 @@ APPVERSION ?= "$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)"
 
 # Application source files
 APP_SOURCE_PATH += src ethereum-plugin-sdk
+INCLUDES_PATH += ${BOLOS_SDK}/lib_standard_app
 
 # Application icons following guidelines:
 # https://developers.ledger.com/docs/embedded-app/design-requirements/#device-icon
