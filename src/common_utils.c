@@ -23,13 +23,21 @@
 #include "lcx_ecfp.h"
 #include "lcx_sha3.h"
 
-void array_hexstr(char *strbuf, const void *bin, unsigned int len) {
-    while (len--) {
-        *strbuf++ = HEXDIGITS[((*((char *) bin)) >> 4) & 0xF];
-        *strbuf++ = HEXDIGITS[(*((char *) bin)) & 0xF];
-        bin = (const void *) ((unsigned int) bin + 1);
+int array_bytes_string(char *out, size_t outl, const void *value, size_t len) {
+    if (outl <= 2) {
+        // Need at least '0x' and 1 digit
+        return -1;
     }
-    *strbuf = 0;  // EOS
+    if (strlcpy(out, "0x", outl) != 2) {
+        goto err;
+    }
+    if (format_hex(value, len, out + 2, outl - 2) < 0) {
+        goto err;
+    }
+    return 0;
+err:
+    *out = '\0';
+    return -1;
 }
 
 uint64_t u64_from_BE(const uint8_t *in, uint8_t size) {
@@ -227,7 +235,7 @@ void getEthAddressFromRawKey(const uint8_t raw_pubkey[static 65],
 }
 
 void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
-                                   char out[static ADDRESS_LENGTH * 2],
+                                   char out[static (ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId) {
     uint8_t hashAddress[CX_KECCAK_256_SIZE];
     CX_ASSERT(cx_keccak_256_hash(raw_pubkey + 1, 64, hashAddress));
@@ -235,7 +243,7 @@ void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
 }
 
 bool getEthAddressStringFromBinary(uint8_t *address,
-                                   char out[static ADDRESS_LENGTH * 2],
+                                   char out[static (ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId) {
     // save some precious stack space
     union locals_union {
@@ -287,7 +295,7 @@ bool getEthAddressStringFromBinary(uint8_t *address,
             }
         }
     }
-    out[40] = '\0';
+    out[ADDRESS_LENGTH * 2] = '\0';
 
     return true;
 }

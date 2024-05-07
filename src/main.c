@@ -16,7 +16,7 @@
  *****************************************************************************/
 
 #include "eth_plugin_interface.h"
-#include "lib_standard_app/swap_lib_calls.h"  // RUN_APPLICATION
+#include "swap_lib_calls.h"  // RUN_APPLICATION
 
 // Functions implemented by the plugin
 void handle_init_contract(ethPluginInitContract_t *parameters);

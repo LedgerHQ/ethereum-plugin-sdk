@@ -25,6 +25,7 @@ APPVERSION ?= "$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)"
 
 # Application source files
 APP_SOURCE_PATH += src ethereum-plugin-sdk
+INCLUDES_PATH += ${BOLOS_SDK}/lib_standard_app
 
 # Application icons following guidelines:
 # https://developers.ledger.com/docs/embedded-app/design-requirements/#device-icon
@@ -33,8 +34,9 @@ ICON_NANOS = icons/nanos_app_$(NORMAL_NAME).gif
 ICON_NANOX = icons/nanox_app_$(NORMAL_NAME).gif
 ICON_NANOSP = $(ICON_NANOX)
 ICON_STAX = icons/stax_app_$(NORMAL_NAME).gif
+ICON_FLEX = icons/flex_app_$(NORMAL_NAME).gif
 
-ifeq ($(TARGET_NAME),TARGET_STAX)
+ifeq ($(TARGET_NAME),$(filter $(TARGET_NAME),TARGET_STAX TARGET_FLEX))
     DEFINES += ICONGLYPH=C_stax_$(NORMAL_NAME)_64px
     DEFINES += ICONBITMAP=C_stax_$(NORMAL_NAME)_64px_bitmap
 endif
