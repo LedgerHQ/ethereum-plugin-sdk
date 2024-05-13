@@ -5,7 +5,23 @@
 | :rotating_light:     | Breaks build                  |
 | :warning:            | Breaks compatibility with app |
 
-## [latest](/) - 2024/04/12
+## [latest](/) - 2024/05/13
+
+### Added
+
+* Flex support
+
+### Fixed
+
+* OOB writes in `getEthAddressStringFromBinary`
+* BOLOS_SDK include path
+
+### Changed
+
+* Deprecate `array_hexstr` to rather use `format_hex` from the SDK
+* Add utility function `array_bytes_string`
+
+## [2bf928b](/../../commit/2bf928b) - 2024/04/12
 
 ### Fixed
 
