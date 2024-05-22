@@ -32,7 +32,6 @@ typedef struct nftInfo_t {
 // TOKENS
 
 #define MAX_TICKER_LEN 11  // 10 characters + '\0'
-#define MAX_ITEMS      2
 
 typedef struct tokenDefinition_t {
     uint8_t address[ADDRESS_LENGTH];  // must be first item
@@ -47,5 +46,9 @@ typedef struct tokenDefinition_t {
 
 typedef union extraInfo_t {
     tokenDefinition_t token;
+// Would have used HAVE_NFT_SUPPORT but it is only declared for the Ethereum app
+// and not plugins
+#ifndef TARGET_NANOS
     nftInfo_t nft;
+#endif
 } extraInfo_t;
