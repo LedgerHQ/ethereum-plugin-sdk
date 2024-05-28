@@ -1,0 +1,106 @@
+---
+name: Build the application for all devices and upload the artifact
+
+on:
+  workflow_call:
+    inputs:
+      app_repository:
+        description: 'The GIT repository to build (defaults to `github.repository`)'
+        required: false
+        default: ${{ github.repository }}
+        type: string
+      app_branch_name:
+        description: 'The GIT branch to build (defaults to `github.ref`)'
+        required: false
+        default: ${{ github.ref }}
+        type: string
+      flags:
+        description: "Additional compilation flags (default to none)"
+        required: false
+        default: ''
+        type: string
+      upload_app_binaries_artifact:
+        description: "The name of the artifact containing the built application binary file(s) to be tested"
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  call_get_app_metadata:
+    # This job digests inputs and repository metadata provided by the `ledger_app.toml` manifest
+    # file, in order to output relevant directories, compatible devices, and other variables needed
+    # by following jobs.
+    name: Retrieve application metadata
+    uses: LedgerHQ/ledger-app-workflows/.github/workflows/_get_app_metadata.yml@v1
+    with:
+      app_repository: ${{ inputs.app_repository }}
+      app_branch_name: ${{ inputs.app_branch_name }}
+      compatible_devices: 'None'
+
+  build:
+    name: Build application for NanoS, X, S+, and Stax
+    needs: call_get_app_metadata
+    strategy:
+      fail-fast: false
+      matrix:
+        device: ${{ fromJSON(needs.call_get_app_metadata.outputs.compatible_devices) }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/ledgerhq/ledger-app-builder/ledger-app-builder-lite:latest
+
+    steps:
+      - name: Clone
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.app_repository }}
+          ref: ${{ inputs.app_branch_name }}
+          submodules: recursive
+
+      - name: Use this version of the ethereum SDK
+        run: |
+          rm -rf ./ethereum-plugin-sdk
+
+      - name: Checkout SDK PR branch
+        uses: actions/checkout@v4
+        with:
+          path: ethereum-plugin-sdk/
+          ref: ${{ github.ref }}
+          repository: ${{ github.repository }}
+
+      - name: Build application
+        id: "build"
+        shell: bash
+        run: |
+          if [[ "${{ needs.call_get_app_metadata.outputs.is_rust }}" == "true" ]];
+          then
+              BUILD_DEVICE_NAME="$(echo ${{ matrix.device }} | sed 's/nanosp/nanosplus/')" && \
+              cd ${{ needs.call_get_app_metadata.outputs.build_directory }} && \
+              cargo +$RUST_NIGHTLY update ledger_device_sdk && \
+              cargo +$RUST_NIGHTLY update ledger_secure_sdk_sys && \
+              cargo ledger build ${BUILD_DEVICE_NAME} && \
+              echo "binary_path=${{ needs.call_get_app_metadata.outputs.build_directory }}/target/*" >> $GITHUB_OUTPUT && \
+              echo "Build complete"
+          else
+              eval "BOLOS_SDK=\$$(echo ${{ matrix.device }} | tr [:lower:] [:upper:])_SDK" && \
+              echo "BOLOS_SDK value will be: ${BOLOS_SDK}" && \
+              make -C ${{ needs.call_get_app_metadata.outputs.build_directory }} -j ${{ inputs.flags }} BOLOS_SDK=${BOLOS_SDK} && \
+              echo "binary_path=${{ needs.call_get_app_metadata.outputs.build_directory }}/build/*" >> $GITHUB_OUTPUT
+              echo "Build complete"
+          fi
+
+      - name: Remove build artifacts before upload
+        run: |
+          if [[ "${{ needs.call_get_app_metadata.outputs.is_rust }}" == "true" ]];
+          then
+              find ${{ needs.call_get_app_metadata.outputs.build_directory }}/target -mindepth 3 -maxdepth 3 -type d -exec rm -rf {} +
+          else
+              find ${{ needs.call_get_app_metadata.outputs.build_directory }}/build/ -mindepth 2 -maxdepth 2 -type d ! -name 'bin' -exec rm -r {} +
+          fi
+
+      - name: Upload app binary
+        if: ${{ inputs.upload_app_binaries_artifact != '' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.upload_app_binaries_artifact }}
+          path: ${{ steps.build.outputs.binary_path }}
+          if-no-files-found: error
