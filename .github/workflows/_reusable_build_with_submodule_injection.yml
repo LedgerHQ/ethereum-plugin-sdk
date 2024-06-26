@@ -99,8 +99,20 @@ jobs:
 
       - name: Upload app binary
         if: ${{ inputs.upload_app_binaries_artifact != '' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.upload_app_binaries_artifact }}
+          name: ${{ inputs.upload_app_binaries_artifact }}-${{ matrix.device }}
           path: ${{ steps.build.outputs.binary_path }}
           if-no-files-found: error
+
+  merge_artifacts:
+    name: Merge build artifacts
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ inputs.upload_app_binaries_artifact != '' }}
+    steps:
+      - uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ inputs.upload_app_binaries_artifact }}
+          pattern: ${{ inputs.upload_app_binaries_artifact }}-*
+          delete-merged: true
