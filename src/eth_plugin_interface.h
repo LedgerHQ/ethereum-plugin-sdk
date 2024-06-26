@@ -89,8 +89,8 @@ typedef struct ethPluginSharedRO_s {
 
 // --8<-- [start:plugin_context]
 // Plugin-only memory allocated by the Ethereum application and used by the
-// plugin.
-#define PLUGIN_CONTEXT_SIZE (5 * INT256_LENGTH)
+// plugin. 1k memory is available.
+#define PLUGIN_CONTEXT_SIZE (32 * INT256_LENGTH)
 // --8<-- [end:plugin_context]
 // It is recommended to cast the raw uin8_t array to a structure meaningful for
 // your plugin
