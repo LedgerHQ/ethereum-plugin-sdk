@@ -77,16 +77,6 @@ typedef enum eth_ui_type_e {
     ETH_UI_TYPE_GENERIC = 0x02,
 } eth_ui_type_t;
 
-// Scratch objects and utilities available to the plugin READ-WRITE
-typedef struct ethPluginSharedRW_s {
-    cx_sha3_t *sha3;
-} ethPluginSharedRW_t;
-
-// Transaction data available to the plugin READ-ONLY
-typedef struct ethPluginSharedRO_s {
-    txContent_t *txContent;
-} ethPluginSharedRO_t;
-
 // --8<-- [start:plugin_context]
 // Plugin-only memory allocated by the Ethereum application and used by the
 // plugin. 1k memory is available.
@@ -126,27 +116,13 @@ adapt for your use case.
 
 // --8<-- [start:handle_init_contract_parameters]
 typedef struct ethPluginInitContract_s {
+    // ===== READ ONLY ===== //
     // INPUT. Used to check that `ETH_PLUGIN_INTERFACE_VERSION_LATEST` is
     // correct.
     eth_plugin_interface_version_t interfaceVersion;
 
-    // OUTPUT. Used by the plugin to inform the Ethereum application of the
-    // result of this handle The following return codes are expected, any other
-    // will abort the signing process:
-    // - ETH_PLUGIN_RESULT_OK
-    // - ETH_PLUGIN_RESULT_FALLBACK : if the signing logic should fallback to
-    // the generic one
-    eth_plugin_result_t result;
-
-    // DEPRECATED, will be removed soon. Do not use.
-    ethPluginSharedRW_t *pluginSharedRW;
-
     // INPUT. Transaction data available to the plugin. READ-ONLY.
-    ethPluginSharedRO_t *pluginSharedRO;
-
-    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
-    // plugin in each handle call.
-    uint8_t *pluginContext;
+    const txContent_t *txContent;
 
     // INPUT. Size of context allocated by the Ethereum application, must be
     // equal to PLUGIN_CONTEXT_SIZE.
@@ -159,6 +135,20 @@ typedef struct ethPluginInitContract_s {
     // INPUT. Total length of the data to come.
     size_t dataSize;
     bip32_path_t *bip32;
+
+    // ===== READ WRITE ===== //
+    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
+    // plugin in each handle call.
+    uint8_t *pluginContext;
+
+    // ===== WRITE ONLY ===== //
+    // OUTPUT. Used by the plugin to inform the Ethereum application of the
+    // result of this handle The following return codes are expected, any other
+    // will abort the signing process:
+    // - ETH_PLUGIN_RESULT_OK
+    // - ETH_PLUGIN_RESULT_FALLBACK : if the signing logic should fallback to
+    // the generic one
+    eth_plugin_result_t result;
 
 } ethPluginInitContract_t;
 // --8<-- [end:handle_init_contract_parameters]
@@ -183,15 +173,9 @@ Adapt and expand it for your use case.
 
 // --8<-- [start:handle_provide_parameter_parameters]
 typedef struct ethPluginProvideParameter_s {
-    // DEPRECATED, will be removed soon. Do not use.
-    ethPluginSharedRW_t *pluginSharedRW;
-
+    // ===== READ ONLY ===== //
     // INPUT. Transaction data available to the plugin. READ-ONLY.
-    ethPluginSharedRO_t *pluginSharedRO;
-
-    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
-    // plugin in each handle call.
-    uint8_t *pluginContext;
+    const txContent_t *txContent;
 
     // INPUT. Pointer to the 32 bytes parameter being parsed in the smart
     // contract data.
@@ -201,6 +185,12 @@ typedef struct ethPluginProvideParameter_s {
     // (starts at 4, following the selector).
     uint32_t parameterOffset;
 
+    // ===== READ WRITE ===== //
+    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
+    // plugin in each handle call.
+    uint8_t *pluginContext; // PLUGIN_CONTEXT_SIZE
+
+    // ===== WRITE ONLY ===== //
     // OUTPUT. Used by the plugin to inform the Ethereum application of the
     // result of this handle The following return codes are expected, any other
     // will abort the signing process:
@@ -237,44 +227,46 @@ boilerplate plugin. Adapt and expand it for your use case.
 
 // --8<-- [start:handle_finalize_parameters]
 typedef struct ethPluginFinalize_s {
-    // DEPRECATED, will be removed soon. Do not use.
-    ethPluginSharedRW_t *pluginSharedRW;
-
+    // ===== READ ONLY ===== //
     // INPUT. Transaction data available to the plugin. READ-ONLY.
-    ethPluginSharedRO_t *pluginSharedRO;
+    const txContent_t *txContent;
 
+    // ===== READ WRITE ===== //
     // RW INPUT. Contains the semi-persistent RAM space that can be used by the
     // plugin in each handle call.
-    uint8_t *pluginContext;
+    uint8_t *pluginContext; // PLUGIN_CONTEXT_SIZE
 
+    // ===== WRITE ONLY ===== //
     // OUTPUT. The plugin can set this value to a 20 bytes array in
     // pluginContext containing the address of an ERC20 token. In this case
     // Ethereum will call the plugin with handle_provide_token() with the
     // requested ERC20 token information. The Ethereum application must be made
     // aware of ERC20 token information first using 'PROVIDE ERC 20 TOKEN
     // INFORMATION' APDU. Leave the value at NULL if not needed
-    uint8_t *tokenLookup1;
+    const uint8_t *tokenLookup1;
     // OUTPUT. Same as tokenLookup1.
-    uint8_t *tokenLookup2;
-
-    // OUTPUT. The plugin needs to set this pointer to a 256 bits number in
-    // pluginContext to display as the amount in UI_AMOUNT_ADDRESS case. IGNORED
-    // if uiType is UI_AMOUNT_ADDRESS.
-    const uint8_t *amount;
-    // OUTPUT. The plugin needs to set this pointer to a 20 bytes address in
-    // pluginContext to display as the address in UI_AMOUNT_ADDRESS case.
-    // IGNORED if uiType is UI_AMOUNT_ADDRESS.
-    const uint8_t *address;
+    const uint8_t *tokenLookup2;
+    // Reminder: const applies to the pointed memory area, which means the plugin
+    // can set the value and ethereum will modify the pointed value.
 
     // OUTPUT. The plugin needs to set this value to either
     // ETH_UI_TYPE_AMOUNT_ADDRESS for an amount/address UI or
     // ETH_UI_TYPE_GENERIC for a generic UI.
     eth_ui_type_t uiType;
-
-    // OUTPUT. The plugin needs to set this value to the number of screens
-    // needed to display the smart contract in ETH_UI_TYPE_GENERIC case. IGNORED
-    // if uiType is UI_AMOUNT_ADDRESS.
-    uint8_t numScreens;
+    union {
+        // OUTPUT. The plugin needs to set this pointer to a 256 bits number in
+        // pluginContext to display as the amount in UI_AMOUNT_ADDRESS case.
+        // IGNORED if uiType is UI_TYPE_GENERIC.
+        const uint8_t *amount;
+        // OUTPUT. The plugin needs to set this value to the number of screens
+        // needed to display the smart contract in ETH_UI_TYPE_GENERIC case.
+        // IGNORED if uiType is UI_AMOUNT_ADDRESS.
+        uint8_t numScreens;
+    };
+    // OUTPUT. The plugin needs to set this pointer to a 20 bytes address in
+    // pluginContext to display as the address in UI_AMOUNT_ADDRESS case.
+    // Set to the user's address if uiType is UI_TYPE_GENERIC
+    const uint8_t *address;  // set a pointer to the destination address (in pluginContext) if uiType is UI_AMOUNT_ADDRESS.
 
     // OUTPUT. Used by the plugin to inform the Ethereum application of the
     // result of this handle The following return codes are expected, any other
@@ -311,15 +303,9 @@ Adapt and expand it for your use case.
 
 // --8<-- [start:handle_provide_token_parameters]
 typedef struct ethPluginProvideInfo_s {
-    // DEPRECATED, will be removed soon. Do not use.
-    ethPluginSharedRW_t *pluginSharedRW;
-
+    // ===== READ ONLY ===== //
     // INPUT. Transaction data available to the plugin. READ-ONLY.
-    ethPluginSharedRO_t *pluginSharedRO;
-
-    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
-    // plugin in each handle call.
-    uint8_t *pluginContext;
+    const txContent_t *txContent;
 
     // INPUT. ERC20 token information as requested by tokenLookup1 in
     // handle_finalize. NULL if not found.
@@ -327,9 +313,16 @@ typedef struct ethPluginProvideInfo_s {
     // INPUT. Same as item1 but for tokenLookup2.
     union extraInfo_t *item2;
 
+    // ===== READ WRITE ===== //
+    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
+    // plugin in each handle call.
+    uint8_t *pluginContext; // PLUGIN_CONTEXT_SIZE
+
+    // ===== WRITE ONLY ===== //
     // OUTPUT. Set by the plugin if it needs to display additional screens based
     // on the information received from the token definitions.
-    uint8_t additionalScreens;
+    uint8_t additionalScreens;  // Used by the plugin if it needs to display additional screens
+                                // based on the information received from the token definitions.
 
     // OUTPUT. Used by the plugin to inform the Ethereum application of the
     // result of this handle The following return codes are expected, any other
@@ -359,25 +352,24 @@ your use case.
 
 // --8<-- [start:handle_query_contract_id_parameters]
 typedef struct ethQueryContractID_s {
-    // DEPRECATED, will be removed soon. Do not use.
-    ethPluginSharedRW_t *pluginSharedRW;
-
+    // ===== READ ONLY ===== //
     // INPUT. Transaction data available to the plugin. READ-ONLY.
-    ethPluginSharedRO_t *pluginSharedRO;
-
-    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
-    // plugin in each handle call.
-    uint8_t *pluginContext;
-
-    // OUTPUT. Pointer to the name of the plugin
-    char *name;
+    const txContent_t *txContent;
     // INPUT. Maximum possible name string length
     size_t nameLength;
-
-    // OUTPUT. Pointer to the version of the plugin
-    char *version;
     // INPUT. Maximum possible version string length
     size_t versionLength;
+
+    // ===== READ WRITE ===== //
+    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
+    // plugin in each handle call.
+    uint8_t *pluginContext; // PLUGIN_CONTEXT_SIZE
+
+    // ===== WRITE ONLY ===== //
+    // OUTPUT. Pointer to the name of the plugin
+    char *name;
+    // OUTPUT. Pointer to the version of the plugin
+    char *version;
 
     // OUTPUT. Used by the plugin to inform the Ethereum application of the
     // result of this handle The following return codes are expected, any other
@@ -405,11 +397,9 @@ your use case.
 
 // --8<-- [start:handle_query_contract_ui_parameters]
 typedef struct ethQueryContractUI_s {
-    // DEPRECATED, will be removed soon. Do not use.
-    ethPluginSharedRW_t *pluginSharedRW;
-
+    // ===== READ ONLY ===== //
     // INPUT. Transaction data available to the plugin. READ-ONLY.
-    ethPluginSharedRO_t *pluginSharedRO;
+    const txContent_t *txContent;
 
     // INPUT. ERC20 token information as requested by tokenLookup1 in
     // handle_finalize. NULL if not found.
@@ -420,24 +410,25 @@ typedef struct ethQueryContractUI_s {
     // INPUT. String that holds the network ticker
     char network_ticker[MAX_TICKER_LEN];
 
-    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
-    // plugin in each handle call.
-    uint8_t *pluginContext;
-
     // INPUT. Current screen to display.
     uint8_t screenIndex;
+    // INPUT. Maximum possible title length
+    size_t titleLength;
+    // INPUT. Maximum possible msg length
+    size_t msgLength;
 
+    // ===== READ WRITE ===== //
+    // RW INPUT. Contains the semi-persistent RAM space that can be used by the
+    // plugin in each handle call.
+    uint8_t *pluginContext; // PLUGIN_CONTEXT_SIZE
+
+    // ===== WRITE ONLY ===== //
     // OUTPUT. Pointer to the first line of the screen, to be filled by the
     // plugin
     char *title;
-    // INPUT. Maximum possible title length
-    size_t titleLength;
-
-    // OUTPUT. Pointer to the second line of the screen, to be filled by the
+    // OUTPUT. Pointer to the second line of he screen, to be filled by the
     // plugin
     char *msg;
-    // INPUT. Maximum possible msg length
-    size_t msgLength;
 
     // OUTPUT. Used by the plugin to inform the Ethereum application of the
     // result of this handle The following return codes are expected, any other

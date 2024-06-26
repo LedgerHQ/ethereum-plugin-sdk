@@ -266,15 +266,4 @@ int allzeroes(const void *buf, size_t n);
  */
 int ismaxint(const uint8_t *buf, int n);
 
-/**
- * @deprecated
- * See format_hex in main SDK
- */
-DEPRECATED static inline void array_hexstr(char *strbuf,
-                                           const void *bin,
-                                           unsigned int len) {
-    // Consider the output buffer is sufficiently large!
-    format_hex(bin, len, strbuf, (2 * len + 1));
-}
-
 // --8<-- [end:common_utils]
