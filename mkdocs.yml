@@ -1,0 +1,75 @@
+site_name: Ethereum plugins documentation
+site_url: https://ethereum-plugin-sdk.ledger.com
+site_author: fbeutin@ledger.fr
+site_description: Documentation for Ethereum plugins
+theme:
+  logo: img/Ledger-logo-696.webp
+  favicon: img/Ledger-logo-696.webp
+  name: material
+  highlightjs: true
+  hljs_languages:
+    - yaml
+  features:
+    - navigation.indexes
+    - navigation.expand
+
+plugins:
+  - search
+  - mermaid2:
+      arguments:
+        theme: 'dark'
+        themeVariables:
+          primaryColor: '#BB2528'
+          primaryTextColor: '#fff'
+          primaryBorderColor: '#7C0000'
+          lineColor: '#F8B229'
+          secondaryColor: '#006100'
+          tertiaryColor: '#fff'
+
+markdown_extensions:
+  - admonition
+  - pymdownx.snippets:
+      check_paths: true
+      base_path:
+        - .
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      preserve_tabs: true
+      custom_fences:
+        # Mermaid diagrams
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Introduction: index.md
+  - Technical Informations:
+    - Technical Informations: technical_informations/index.md
+    - Sequence diagram: technical_informations/diagram.md
+    - Handlers:
+      - Handlers: technical_informations/handlers/index.md
+      - handle_init_contract(): technical_informations/handlers/handle_init_contract.md
+      - handle_provide_parameter(): technical_informations/handlers/handle_provide_parameter.md
+      - handle_finalize(): technical_informations/handlers/handle_finalize.md
+      - handle_provide_token(): technical_informations/handlers/handle_provide_token.md
+      - handle_query_contract_id(): technical_informations/handlers/handle_query_contract_id.md
+      - handle_query_contract_ui(): technical_informations/handlers/handle_query_contract_ui.md
+    - Utility functions:
+      - Utility functions: technical_informations/utils/index.md
+      - common_utils.h: technical_informations/utils/common_utils.md
+      - plugin_utils.h: technical_informations/utils/plugin_utils.md
+    - Transaction data: technical_informations/tx_content.md
+    - Global variables and semi-persistent memory: technical_informations/globals.md
+  - Test Framework:
+    - Test Framework: test_framework/index.md
+    - Functional tests: test_framework/ragger.md
+    - Fuzzing: test_framework/fuzzing.md
+    - CI: test_framework/ci.md
+  - Walkthrough overview: walkthrough/index.md
+
+watch:
+  - mkdocs.yml
+  - docs/
+  - app-plugin-boilerplate/
+  - src/
