@@ -20,17 +20,28 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "os.h"
-#include "cx.h"
 #include "common_utils.h"
+#include "cx.h"
+#include "os.h"
 
+/*
+--8<-- [start:tx_content_explanation]
+Transaction data are provided to the plugin by the Ethereum application through
+the `txContent_t` structure.
+
+This structure is provided in every handler.
+--8<-- [end:tx_content_explanation]
+*/
+
+// --8<-- [start:tx_content_structures]
 typedef struct txInt256_t {
     uint8_t value[INT256_LENGTH];
     uint8_t length;
 } txInt256_t;
 
 typedef struct txContent_t {
-    txInt256_t gasprice;  // Used as MaxFeePerGas when dealing with EIP1559 transactions.
+    txInt256_t gasprice;  // Used as MaxFeePerGas when dealing with EIP1559
+                          // transactions.
     txInt256_t startgas;  // Also known as `gasLimit`.
     txInt256_t value;
     txInt256_t nonce;
@@ -41,3 +52,4 @@ typedef struct txContent_t {
     uint8_t vLength;
     bool dataPresent;
 } txContent_t;
+// --8<-- [end:tx_content_structures]
