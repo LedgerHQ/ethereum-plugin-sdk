@@ -12,23 +12,25 @@
         <meta name="author" content="fbeutin@ledger.fr">
       
       
-        <link rel="canonical" href="https://LedgerHQ.github.io/">
+        <link rel="canonical" href="https://LedgerHQ.github.io/walkthrough/">
       
       
+        <link rel="prev" href="..">
       
-        <link rel="next" href="walkthrough/">
+      
+        <link rel="next" href="../handlers/">
       
       
-      <link rel="icon" href="img/Ledger-logo-696.webp">
+      <link rel="icon" href="../img/Ledger-logo-696.webp">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
     
     
       
-        <title>Ethereum plugins documentation</title>
+        <title>Walkthrough - Ethereum plugins documentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
       
       
 
@@ -47,7 +49,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -66,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ethereum-plugin-documentation" class="md-skip">
+        <a href="#change-the-plugin-metadata" class="md-skip">
           Skip to content
         </a>
       
@@ -82,9 +84,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Ethereum plugins documentation" class="md-header__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
+    <a href=".." title="Ethereum plugins documentation" class="md-header__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
       
-  <img src="img/Ledger-logo-696.webp" alt="logo">
+  <img src="../img/Ledger-logo-696.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -101,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction
+              Walkthrough
             
           </span>
         </div>
@@ -176,15 +178,35 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Ethereum plugins documentation" class="md-nav__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
+    <a href=".." title="Ethereum plugins documentation" class="md-nav__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
       
-  <img src="img/Ledger-logo-696.webp" alt="logo">
+  <img src="../img/Ledger-logo-696.webp" alt="logo">
 
     </a>
     Ethereum plugins documentation
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
     
       
       
@@ -199,25 +221,23 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Introduction
+    Walkthrough
   </span>
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Introduction
+    Walkthrough
   </span>
   
 
@@ -229,8 +249,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -239,37 +257,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-plugin" class="md-nav__link">
+  <a href="#change-the-plugin-metadata" class="md-nav__link">
     <span class="md-ellipsis">
-      What is a plugin?
+      Change the plugin metadata
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-do-i-start" class="md-nav__link">
+  <a href="#change-the-plugin-icons" class="md-nav__link">
     <span class="md-ellipsis">
-      Where do I start?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Where do I start?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#use-the-ethereum-plugin-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      Use the Ethereum Plugin SDK
+      Change the plugin icons
     </span>
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#change-the-selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change the selector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Change the selector">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fork-the-plugin-boilerplate" class="md-nav__link">
+  <a href="#example-lets-support-swapexactethfortoken-from-uniswap-v2" class="md-nav__link">
     <span class="md-ellipsis">
-      Fork the Plugin Boilerplate
+      Example: Let's support SwapExactEthForToken from Uniswap V2
     </span>
   </a>
   
@@ -281,9 +299,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#plugin-file-structure" class="md-nav__link">
+  <a href="#adapt-the-handlers" class="md-nav__link">
     <span class="md-ellipsis">
-      Plugin file structure
+      Adapt the handlers
     </span>
   </a>
   
@@ -293,26 +311,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="walkthrough/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Walkthrough
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -356,7 +354,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="handlers/" class="md-nav__link ">
+            <a href="../handlers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -389,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="handlers/handle_init_contract/" class="md-nav__link">
+      <a href="../handlers/handle_init_contract/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -410,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="handlers/handle_provide_parameter/" class="md-nav__link">
+      <a href="../handlers/handle_provide_parameter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -431,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="handlers/handle_finalize/" class="md-nav__link">
+      <a href="../handlers/handle_finalize/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -452,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="handlers/handle_provide_token/" class="md-nav__link">
+      <a href="../handlers/handle_provide_token/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -473,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="handlers/handle_query_contract_id/" class="md-nav__link">
+      <a href="../handlers/handle_query_contract_id/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -494,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="handlers/handle_query_contract_ui/" class="md-nav__link">
+      <a href="../handlers/handle_query_contract_ui/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -546,7 +544,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="technical_informations/" class="md-nav__link ">
+            <a href="../technical_informations/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -579,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/diagram/" class="md-nav__link">
+      <a href="../technical_informations/diagram/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -600,7 +598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/globals/" class="md-nav__link">
+      <a href="../technical_informations/globals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -638,8 +636,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -648,37 +644,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-plugin" class="md-nav__link">
+  <a href="#change-the-plugin-metadata" class="md-nav__link">
     <span class="md-ellipsis">
-      What is a plugin?
+      Change the plugin metadata
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-do-i-start" class="md-nav__link">
+  <a href="#change-the-plugin-icons" class="md-nav__link">
     <span class="md-ellipsis">
-      Where do I start?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Where do I start?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#use-the-ethereum-plugin-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      Use the Ethereum Plugin SDK
+      Change the plugin icons
     </span>
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#change-the-selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change the selector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Change the selector">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fork-the-plugin-boilerplate" class="md-nav__link">
+  <a href="#example-lets-support-swapexactethfortoken-from-uniswap-v2" class="md-nav__link">
     <span class="md-ellipsis">
-      Fork the Plugin Boilerplate
+      Example: Let's support SwapExactEthForToken from Uniswap V2
     </span>
   </a>
   
@@ -690,9 +686,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#plugin-file-structure" class="md-nav__link">
+  <a href="#adapt-the-handlers" class="md-nav__link">
     <span class="md-ellipsis">
-      Plugin file structure
+      Adapt the handlers
     </span>
   </a>
   
@@ -713,44 +709,38 @@
                   
 
 
-<h1 id="ethereum-plugin-documentation">Ethereum plugin documentation</h1>
-<p>This documentation will help you design your own ethereum plugin.</p>
-<h2 id="what-is-a-plugin">What is a plugin?</h2>
-<p>A plugin is a lightweight application that only performs smart contract parsing and leverages the Ethereum application for the rest.</p>
-<p>Your plugin will allow your users to clear-sign your smart contracts when using a Ledger device.</p>
-<p>Plugins are designed to work hand-in-hand with the Ethereum application:</p>
+  <h1>Walkthrough</h1>
+
+<p>This page will walk you through developing your plugin, from the Boilerplate fork to the functional tests.<br/>
+Sections of the template code you can edit are commented with a <code>EDIT THIS</code> marker.</p>
+<h2 id="change-the-plugin-metadata">Change the plugin metadata</h2>
+<p>In the <code>Makefile</code> you will need to change the following elements:</p>
 <ul>
-<li>The plugin handle the smart contract parsing</li>
-<li>The Ethereum application handles everything else (APDU reception, signature, screen management, bluetooth, etc)</li>
+<li><code>APPNAME</code> to suit your plugin name (e.g., Paraswap, 1inch, Lido)</li>
+<li><code>APPVERSION</code> for your plugin version</li>
 </ul>
-<p>Upon your smart contract reception, the Ethereum application will call your plugin to query the elements to display and your plugin will be responsible for:</p>
-<ul>
-<li>Extracting the relevant information from the smart contract.</li>
-<li>Replying the string to be displayed back to the Ethereum App.</li>
-</ul>
-<h2 id="where-do-i-start">Where do I start?</h2>
-<h3 id="use-the-ethereum-plugin-sdk">Use the Ethereum Plugin SDK</h3>
-<p>Use the Ledger developed <a href="https://github.com/LedgerHQ/ethereum-plugin-sdk">Ethereum Plugin SDK</a>.<br/>
-The SDK will do all the busy work of your plugin and leave you with only a few handlers to code.<br/>
-The SDK is designed to be used as a git submodule.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Always keep your SDK up to date with its <strong>develop</strong> branch.<br/>
-We are providing a CI workflow to help you check that the latest version is being used.</p>
-</div>
-<p>Please find more information in the dedicated page.</p>
-<h3 id="fork-the-plugin-boilerplate">Fork the Plugin Boilerplate</h3>
-<p>While starting a new plugin application from a blank repository + the SDK is technically possible, it is not <em>at all</em> recommended and support would not be provided.<br/>
-Instead, fork our official template application <a href="https://github.com/LedgerHQ/app-plugin-boilerplate">Plugin Boilerplate</a> and start from there.</p>
-<p>You will start with a correct build structure, examples of handlers, and our test framework already setup, and the necessary CI workflows already setup.</p>
-<h2 id="plugin-file-structure">Plugin file structure</h2>
-<ul>
-<li><code>ethereum-plugin-sdk/</code>: This repository contains the interface between the Ethereum app and your plugin, as well as a lot of utility functions.</li>
-<li><code>icons/</code> and <code>glyphs/</code>: plugin icons as displayed on the device. We will get to it later, but you can read about it <a href="https://developers.ledger.com/docs/device-app/deliver/deliverables/icons#device-icon">here</a></li>
-<li><code>src/</code>: the source code of the plugin (in C).</li>
-<li><code>tests/</code>: the test folder (using the Ragger testing framework. More information here: <a href="https://ledgerhq.github.io/ragger/">Ragger</a>).</li>
-<li><code>.github/workflows</code>: the CI workflows required to showcase your plugin's quality. More information here: <a href="https://github.com/LedgerHQ/ledger-app-workflows/">ledger-app-workflows</a></li>
-</ul>
+<h2 id="change-the-plugin-icons">Change the plugin icons</h2>
+<p>In the <code>icons/</code> and <code>glyphs/</code> directory, rename the images to include your <code>APPNAME</code> instead of the <code>pluginboilerplate</code> name.<br/>
+Change the picture provided to use one suitable for your plugin.<br/>
+Don't forget to refer to the <a href="https://developers.ledger.com/docs/device-app/deliver/deliverables/icons#device-icon">documentation</a>.<br/>
+Uncompatible icons will be detected by the CI.</p>
+<h2 id="change-the-selector">Change the selector</h2>
+<p>Let’s go to the first <code>EDIT THIS</code> comment in <code>app-plugin-boilerplate/src/plugin.h</code>. In this file you can list all the selectors for each contract. The template uses uses two selectors but you are not limited. <br/>
+Enter your selectors here, in the format X(NAME, value).</p>
+<h3 id="example-lets-support-swapexactethfortoken-from-uniswap-v2">Example: Let's support <code>SwapExactEthForToken</code> from Uniswap V2</h3>
+<p>You can find it using Etherscan, and you can also compose it using the ABI (Application Binary Interface).</p>
+<p>By looking at <a href="https://etherscan.io/txs?a=0x7a250d5630b4cf539739df2c5dacb4c659f2488d">recent transactions on Uniswap</a>, we find a transaction with the <code>SwapExactEthForToken</code> method. Here is <a href="https://etherscan.io/tx/0x216bfa6fb8488901d168810cda1b716d1abcb002a87c3224180deaff00c950fc">an example</a>.</p>
+<p>Let's scroll down and click on "Click to see more", to read:</p>
+<p><img alt="Screenshot" src="img/uniswap.webp" /></p>
+<p>The header line shows <code>Method ID</code> to be <code>0x7ff36ab5</code>.
+This is going to be the 4 bytes of <code>SWAP_EXACT_ETH_FOR_TOKENS_SELECTOR</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#define SELECTORS_LIST(X)                    \</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">    X(SWAP_EXACT_ETH_FOR_TOKENS_SELECTOR, 0x7ff36ab5)</span>
+</code></pre></div>
+<h2 id="adapt-the-handlers">Adapt the handlers</h2>
+<p>Now we have to change each handler to parse and display your smart contract.</p>
+<p>We advise you to stick to the file structure done in plugin-boilerplate and keep each handler in a dedicated file.</p>
+<p>Please look at the <a href="../technical_informations/diagram">sequence diagram</a> to better understand at which step each handler is called.</p>
 
 
 
@@ -797,10 +787,10 @@ Instead, fork our official template application <a href="https://github.com/Ledg
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.indexes", "navigation.expand"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   </body>
