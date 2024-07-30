@@ -1008,12 +1008,16 @@ Instead, fork our official template application <a href="https://github.com/Ledg
 <p>You will start with a correct build structure, examples of handlers, our test framework working, and the CI workflows already setup.</p>
 <h2 id="plugin-file-structure">Plugin file structure</h2>
 <ul>
+<li><code>.github/workflows</code>: the <a href="test_framework/ci/">CI workflows</a> required to showcase your plugin's quality.</li>
+<li><code>Makefile</code>: The entry point of the compilation of your plugin.</li>
+<li><code>PLUGIN_SPECIFICATION.md</code>: The specification of the supported smart-contract and selectors of your plugin.</li>
 <li><code>ethereum-plugin-sdk/</code>: This repository contains the interface between the Ethereum app and your plugin, as well as a lot of utility functions.</li>
-<li><code>icons/</code>: Icons displayed on the device dashboard.</li>
-<li><code>glyphs/</code>: Icons displayed by the Ethereum application when using the plugin.</li>
+<li><code>fuzzing/</code>: the <a href="test_framework/fuzzing/">Fuzzer</a> folder.</li>
+<li><code>glyphs/</code>: The icon displayed by the Ethereum application when using the plugin on a Touchscreen device.</li>
+<li><code>icons/</code>: The icons displayed on the device dashboard on any device.</li>
+<li><code>ledger_app.toml</code>: the <a href="https://github.com/LedgerHQ/ledgered/blob/master/doc/manifest.md">Manifest</a> of your plugin, used to bridge with the Ledger developed tools.</li>
 <li><code>src/</code>: the source code of the plugin (in C).</li>
-<li><code>tests/</code>: the test folder (using the Ragger testing framework. More information here: <a href="https://ledgerhq.github.io/ragger/">Ragger</a>).</li>
-<li><code>.github/workflows</code>: the CI workflows required to showcase your plugin's quality. More information here: <a href="https://github.com/LedgerHQ/ledger-app-workflows/">ledger-app-workflows</a></li>
+<li><code>tests/</code>: the <a href="test_framework/ragger/">tests</a> folder.</li>
 </ul>
 
 
