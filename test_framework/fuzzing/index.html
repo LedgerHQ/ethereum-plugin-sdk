@@ -12,23 +12,25 @@
         <meta name="author" content="fbeutin@ledger.fr">
       
       
-        <link rel="canonical" href="https://LedgerHQ.github.io/">
+        <link rel="canonical" href="https://LedgerHQ.github.io/test_framework/fuzzing/">
       
       
+        <link rel="prev" href="../ragger/">
       
-        <link rel="next" href="technical_informations/">
+      
+        <link rel="next" href="../ci/">
       
       
-      <link rel="icon" href="img/Ledger-logo-696.webp">
+      <link rel="icon" href="../../img/Ledger-logo-696.webp">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
     
     
       
-        <title>Ethereum plugins documentation</title>
+        <title>Fuzzing - Ethereum plugins documentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
       
       
 
@@ -47,7 +49,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -66,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ethereum-plugin-documentation" class="md-skip">
+        <a href="#fuzzing-on-transaction-parser" class="md-skip">
           Skip to content
         </a>
       
@@ -82,9 +84,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Ethereum plugins documentation" class="md-header__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
+    <a href="../.." title="Ethereum plugins documentation" class="md-header__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
       
-  <img src="img/Ledger-logo-696.webp" alt="logo">
+  <img src="../../img/Ledger-logo-696.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -101,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction
+              Fuzzing
             
           </span>
         </div>
@@ -176,9 +178,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Ethereum plugins documentation" class="md-nav__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
+    <a href="../.." title="Ethereum plugins documentation" class="md-nav__button md-logo" aria-label="Ethereum plugins documentation" data-md-component="logo">
       
-  <img src="img/Ledger-logo-696.webp" alt="logo">
+  <img src="../../img/Ledger-logo-696.webp" alt="logo">
 
     </a>
     Ethereum plugins documentation
@@ -190,30 +192,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Introduction
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -222,77 +204,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-a-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is a plugin?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#coding-my-own-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      Coding my own plugin
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Coding my own plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#use-the-ethereum-plugin-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      Use the Ethereum Plugin SDK
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fork-the-plugin-boilerplate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fork the Plugin Boilerplate
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#plugin-file-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Plugin file structure
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -334,7 +245,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="technical_informations/" class="md-nav__link ">
+            <a href="../../technical_informations/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -367,7 +278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/diagram/" class="md-nav__link">
+      <a href="../../technical_informations/diagram/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -420,7 +331,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="technical_informations/handlers/" class="md-nav__link ">
+            <a href="../../technical_informations/handlers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -453,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/handlers/handle_init_contract/" class="md-nav__link">
+      <a href="../../technical_informations/handlers/handle_init_contract/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -474,7 +385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/handlers/handle_provide_parameter/" class="md-nav__link">
+      <a href="../../technical_informations/handlers/handle_provide_parameter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -495,7 +406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/handlers/handle_finalize/" class="md-nav__link">
+      <a href="../../technical_informations/handlers/handle_finalize/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -516,7 +427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/handlers/handle_provide_token/" class="md-nav__link">
+      <a href="../../technical_informations/handlers/handle_provide_token/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -537,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/handlers/handle_query_contract_id/" class="md-nav__link">
+      <a href="../../technical_informations/handlers/handle_query_contract_id/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -558,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/handlers/handle_query_contract_ui/" class="md-nav__link">
+      <a href="../../technical_informations/handlers/handle_query_contract_ui/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -611,7 +522,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="technical_informations/utils/" class="md-nav__link ">
+            <a href="../../technical_informations/utils/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -644,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/utils/common_utils/" class="md-nav__link">
+      <a href="../../technical_informations/utils/common_utils/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -665,7 +576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/utils/plugin_utils/" class="md-nav__link">
+      <a href="../../technical_informations/utils/plugin_utils/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -694,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/tx_content/" class="md-nav__link">
+      <a href="../../technical_informations/tx_content/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -715,7 +626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="technical_informations/globals/" class="md-nav__link">
+      <a href="../../technical_informations/globals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -740,6 +651,8 @@
       
   
   
+    
+  
   
   
     
@@ -758,18 +671,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="test_framework/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -786,7 +697,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Test Framework
@@ -802,7 +713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="test_framework/ragger/" class="md-nav__link">
+      <a href="../ragger/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -820,10 +731,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="test_framework/fuzzing/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Fuzzing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -832,6 +763,110 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#manual-usage-based-on-ledger-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual usage based on Ledger container
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual usage based on Ledger container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-usage-based-on-clusterfuzzlite-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full usage based on clusterfuzzlite container
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full usage based on clusterfuzzlite container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -844,7 +879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="test_framework/ci/" class="md-nav__link">
+      <a href="../ci/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -872,7 +907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="walkthrough/" class="md-nav__link">
+      <a href="../../walkthrough/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -912,37 +947,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-plugin" class="md-nav__link">
+  <a href="#manual-usage-based-on-ledger-container" class="md-nav__link">
     <span class="md-ellipsis">
-      What is a plugin?
+      Manual usage based on Ledger container
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#coding-my-own-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      Coding my own plugin
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Coding my own plugin">
+    <nav class="md-nav" aria-label="Manual usage based on Ledger container">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#use-the-ethereum-plugin-sdk" class="md-nav__link">
+  <a href="#preparation" class="md-nav__link">
     <span class="md-ellipsis">
-      Use the Ethereum Plugin SDK
+      Preparation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fork-the-plugin-boilerplate" class="md-nav__link">
+  <a href="#compilation" class="md-nav__link">
     <span class="md-ellipsis">
-      Fork the Plugin Boilerplate
+      Compilation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run
     </span>
   </a>
   
@@ -954,11 +989,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#plugin-file-structure" class="md-nav__link">
+  <a href="#full-usage-based-on-clusterfuzzlite-container" class="md-nav__link">
     <span class="md-ellipsis">
-      Plugin file structure
+      Full usage based on clusterfuzzlite container
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Full usage based on clusterfuzzlite container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -977,44 +1045,59 @@
                   
 
 
-<h1 id="ethereum-plugin-documentation">Ethereum plugin documentation</h1>
-<p>This documentation will help you design your own ethereum plugin.</p>
-<h2 id="what-is-a-plugin">What is a plugin?</h2>
-<p>A plugin is a lightweight application that only performs smart contract parsing and leverages the Ethereum application for the rest.</p>
-<p>Your plugin will allow your users to clear-sign your smart contracts when using a Ledger device.</p>
-<p>Plugins are designed to work hand-in-hand with the Ethereum application:</p>
-<ul>
-<li>The plugin handle the smart contract parsing</li>
-<li>The Ethereum application handles everything else (APDU reception, signature, screen management, bluetooth, etc)</li>
-</ul>
-<p>Upon your smart contract reception, the Ethereum application will call your plugin to query the elements to display and your plugin will be responsible for:</p>
-<ul>
-<li>Extracting the relevant information from the smart contract.</li>
-<li>Replying the string to be displayed back to the Ethereum App.</li>
-</ul>
-<h2 id="coding-my-own-plugin">Coding my own plugin</h2>
-<h3 id="use-the-ethereum-plugin-sdk">Use the Ethereum Plugin SDK</h3>
-<p>Use the Ledger developed <a href="https://github.com/LedgerHQ/ethereum-plugin-sdk">Ethereum Plugin SDK</a>.<br/>
-The SDK will do all the busy work of your plugin and leave you with only a few handlers to code.<br/>
-The SDK is designed to be used as a git submodule.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Always keep your SDK up to date with its <strong>develop</strong> branch.<br/>
-We are providing a CI workflow to help you check that the latest version is being used.</p>
-</div>
-<h3 id="fork-the-plugin-boilerplate">Fork the Plugin Boilerplate</h3>
-<p>While starting a new plugin application from a blank repository + the SDK is technically possible, it is not <em>at all</em> recommended and support would not be provided.<br/>
-Instead, fork our official template application <a href="https://github.com/LedgerHQ/app-plugin-boilerplate">Plugin Boilerplate</a> and start from there.</p>
-<p>You will start with a correct build structure, examples of handlers, our test framework working, and the CI workflows already setup.</p>
-<h2 id="plugin-file-structure">Plugin file structure</h2>
-<ul>
-<li><code>ethereum-plugin-sdk/</code>: This repository contains the interface between the Ethereum app and your plugin, as well as a lot of utility functions.</li>
-<li><code>icons/</code>: Icons displayed on the device dashboard.</li>
-<li><code>glyphs/</code>: Icons displayed by the Ethereum application when using the plugin.</li>
-<li><code>src/</code>: the source code of the plugin (in C).</li>
-<li><code>tests/</code>: the test folder (using the Ragger testing framework. More information here: <a href="https://ledgerhq.github.io/ragger/">Ragger</a>).</li>
-<li><code>.github/workflows</code>: the CI workflows required to showcase your plugin's quality. More information here: <a href="https://github.com/LedgerHQ/ledger-app-workflows/">ledger-app-workflows</a></li>
-</ul>
+<h1 id="fuzzing-on-transaction-parser">Fuzzing on transaction parser</h1>
+<p>Fuzzing allows us to test how a program behaves when provided with invalid, unexpected, or random data as input.</p>
+<p>In the case of <code>app-plugin-boilerplate</code> we want to test the code that is responsible for handling the contract data.
+The fuzzer needs to implement <code>int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size)</code>, which provides an array of random bytes that can be used to simulate a serialized transaction.
+If the application crashes, or a <a href="https://github.com/google/sanitizers">sanitizer</a> detects any kind of access violation, the fuzzing process is stopped, a report regarding the vulnerability is shown, and the input that triggered the bug is written to disk under the name <code>crash-*</code>. The vulnerable input file created can be passed as an argument to the fuzzer to triage the issue.</p>
+<blockquote>
+<p><strong>Note</strong>: Usually we want to write a separate fuzz target for each functionality.</p>
+</blockquote>
+<h2 id="manual-usage-based-on-ledger-container">Manual usage based on Ledger container</h2>
+<h3 id="preparation">Preparation</h3>
+<p>Before being able to use the fuzzing tests, the environment must be prepared with all submodules.
+To install them, use the following command in the repository root directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init
+</code></pre></div>
+<p>The fuzzer can run from the docker <code>ledger-app-builder-legacy</code>. You can download it from the <code>ghcr.io</code> docker repository:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/ledgerhq/ledger-app-builder/ledger-app-builder-legacy:latest
+</code></pre></div>
+<p>You can then enter this development environment by executing the following command from the repository root directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-ti<span class="w"> </span>--user<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>realpath<span class="w"> </span>.<span class="k">)</span><span class="s2">:/app&quot;</span><span class="w"> </span>ghcr.io/ledgerhq/ledger-app-builder/ledger-app-builder-legacy:latest
+</code></pre></div>
+<h3 id="compilation">Compilation</h3>
+<p>Once in the container, go into the <code>fuzzing</code> folder to compile the fuzzer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>fuzzing
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># cmake initialization</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>cmake<span class="w"> </span>-DBOLOS_SDK<span class="o">=</span>/opt/nanox-secure-sdk<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>/usr/bin/clang<span class="w"> </span>-Bbuild<span class="w"> </span>-H.
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Fuzzer compilation</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>make<span class="w"> </span>-C<span class="w"> </span>build
+</code></pre></div>
+<h3 id="run">Run</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./build/fuzz
+</code></pre></div>
+<h2 id="full-usage-based-on-clusterfuzzlite-container">Full usage based on <code>clusterfuzzlite</code> container</h2>
+<p>Exactly the same context as the CI, directly using the <code>clusterfuzzlite</code> environment.</p>
+<p>More info can be found here:
+<a href="https://google.github.io/clusterfuzzlite/">https://google.github.io/clusterfuzzlite/</a></p>
+<h3 id="preparation_1">Preparation</h3>
+<p>The principle is to build the container, and run it to perform the fuzzing.</p>
+<blockquote>
+<p><strong>Note</strong>: The container contains a copy of the sources (they are not cloned), which means the <code>docker build</code> command must be re-executed after each code modification.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Prepare directory tree</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mkdir<span class="w"> </span>fuzzing/<span class="o">{</span>corpus,out<span class="o">}</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Container generation</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>app-plugin-boilerplate<span class="w"> </span>--file<span class="w"> </span>.clusterfuzzlite/Dockerfile<span class="w"> </span>.
+</code></pre></div>
+<h3 id="compilation_1">Compilation</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>-e<span class="w"> </span><span class="nv">FUZZING_LANGUAGE</span><span class="o">=</span>c<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>realpath<span class="w"> </span>.<span class="k">)</span><span class="s2">/fuzzing/out:/out&quot;</span><span class="w"> </span>-ti<span class="w"> </span>app-plugin-boilerplate
+</code></pre></div>
+<h3 id="run_1">Run</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>-e<span class="w"> </span><span class="nv">FUZZING_ENGINE</span><span class="o">=</span>libfuzzer<span class="w"> </span>-e<span class="w"> </span><span class="nv">RUN_FUZZER_MODE</span><span class="o">=</span>interactive<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>realpath<span class="w"> </span>.<span class="k">)</span><span class="s2">/fuzzing/corpus:/tmp/fuzz_corpus&quot;</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>realpath<span class="w"> </span>.<span class="k">)</span><span class="s2">/fuzzing/out:/out&quot;</span><span class="w"> </span>-ti<span class="w"> </span>gcr.io/oss-fuzz-base/base-runner<span class="w"> </span>run_fuzzer<span class="w"> </span>fuzz
+</code></pre></div>
 
 
 
@@ -1061,10 +1144,10 @@ Instead, fork our official template application <a href="https://github.com/Ledg
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.indexes", "navigation.expand"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.expand"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   </body>

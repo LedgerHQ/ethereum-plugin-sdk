@@ -12,13 +12,13 @@
         <meta name="author" content="fbeutin@ledger.fr">
       
       
-        <link rel="canonical" href="https://LedgerHQ.github.io/handlers/handle_provide_token/">
+        <link rel="canonical" href="https://LedgerHQ.github.io/technical_informations/utils/">
       
       
-        <link rel="prev" href="../handle_finalize/">
+        <link rel="prev" href="../handlers/handle_query_contract_ui/">
       
       
-        <link rel="next" href="../handle_query_contract_id/">
+        <link rel="next" href="common_utils/">
       
       
       <link rel="icon" href="../../img/Ledger-logo-696.webp">
@@ -26,7 +26,7 @@
     
     
       
-        <title>handle_provide_token() - Ethereum plugins documentation</title>
+        <title>Utility functions - Ethereum plugins documentation</title>
       
     
     
@@ -67,11 +67,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#handle_provide_token" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              handle_provide_token()
+              Utility functions
             
           </span>
         </div>
@@ -212,26 +207,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../../walkthrough/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Walkthrough
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -241,8 +216,6 @@
       
         
           
-        
-      
         
       
         
@@ -262,12 +235,98 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
             <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Technical Informations
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Technical Informations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sequence diagram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../handlers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -278,14 +337,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Handlers
           </label>
@@ -300,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../handle_init_contract/" class="md-nav__link">
+      <a href="../handlers/handle_init_contract/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -321,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../handle_provide_parameter/" class="md-nav__link">
+      <a href="../handlers/handle_provide_parameter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -342,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../handle_finalize/" class="md-nav__link">
+      <a href="../handlers/handle_finalize/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -360,30 +419,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    handle_provide_token()
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../handlers/handle_provide_token/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -392,44 +431,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#handle-explanation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Handle explanation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fields-descriptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fields descriptions
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -442,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../handle_query_contract_id/" class="md-nav__link">
+      <a href="../handlers/handle_query_contract_id/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../handle_query_contract_ui/" class="md-nav__link">
+      <a href="../handlers/handle_query_contract_ui/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -483,6 +484,163 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    Utility functions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Utility functions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="common_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    common_utils.h
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugin_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    plugin_utils.h
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tx_content/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transaction data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../globals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global variables and semi-persistent memory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
@@ -495,6 +653,8 @@
       
         
           
+        
+      
         
       
         
@@ -510,32 +670,32 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../technical_informations/" class="md-nav__link ">
+            <a href="../../test_framework/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    Technical Informations
+    Test Framework
   </span>
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Technical Informations
+            Test Framework
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -548,11 +708,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical_informations/diagram/" class="md-nav__link">
+      <a href="../../test_framework/ragger/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Sequence diagram
+    Functional tests
   </span>
   
 
@@ -569,11 +729,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical_informations/globals/" class="md-nav__link">
+      <a href="../../test_framework/fuzzing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    A note on Globals variables and semi-persistent memory
+    Fuzzing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_framework/ci/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CI
   </span>
   
 
@@ -586,6 +767,26 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Walkthrough overview
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -607,34 +808,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#handle-explanation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Handle explanation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fields-descriptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fields descriptions
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -649,48 +822,10 @@
                   
 
 
-<h1 id="handle_provide_token">handle_provide_token()</h1>
-<h2 id="handle-explanation">Handle explanation</h2>
-<p>The Ethereum application will call this handle when the plugin has requested ERC20 token information in <code>handle_finalize</code></p>
-<p>The plugin needs to perform the following actions:</p>
-<ul>
-<li>Check that provided token matches the one requested.</li>
-<li>Increase the number of screens needed for the display if needed.</li>
-<li>Report an error to the ethereum application if the display must be aborted.</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The Ethereum application can only provide to the plugin information about ERC20 token it knows about.
-You need to provide the ERC20 token information to the Ethereum application using <code>PROVIDE ERC 20 TOKEN INFORMATION</code> APDU.</p>
-</div>
-<p>An example of token info providing is already done in the boilerplate plugin. Adapt and expand it for your use case.</p>
-<h2 id="fields-descriptions">Fields descriptions</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ethPluginProvideInfo_s</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// DEPRECATED, will be removed soon. Do not use.</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">ethPluginSharedRW_t</span><span class="w"> </span><span class="o">*</span><span class="n">pluginSharedRW</span><span class="p">;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="c1">// INPUT. Transaction data available to the plugin. READ-ONLY.</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">ethPluginSharedRO_t</span><span class="w"> </span><span class="o">*</span><span class="n">pluginSharedRO</span><span class="p">;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// RW INPUT. Contains the semi-persistent RAM space that can be used by the plugin in each handle call.</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pluginContext</span><span class="p">;</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="c1">// INPUT. ERC20 token information as requested by tokenLookup1 in handle_finalize. NULL if not found.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="nc">extraInfo_t</span><span class="w"> </span><span class="o">*</span><span class="n">item1</span><span class="p">;</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="c1">// INPUT. Same as item1 but for tokenLookup2.</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="nc">extraInfo_t</span><span class="w"> </span><span class="o">*</span><span class="n">item2</span><span class="p">;</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="c1">// OUTPUT. Set by the plugin if it needs to display additional screens based on the information received from the token definitions.</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">additionalScreens</span><span class="p">;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="c1">// OUTPUT. Used by the plugin to inform the Ethereum application of the result of this handle</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="c1">// The following return codes are expected, any other will abort the signing process:</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="c1">// - ETH_PLUGIN_RESULT_OK</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="c1">// - ETH_PLUGIN_RESULT_FALLBACK : if the signing logic should fallback to the generic one</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="n">eth_plugin_result_t</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">}</span><span class="w"> </span><span class="n">ethPluginProvideInfo_t</span><span class="p">;</span>
-</code></pre></div>
+  <h1>Utility functions</h1>
+
+<p>Utility functions are provided by the Ethereum Plugin SDK to help you code your plugin.</p>
+<p>They are complementary to the utility functions of the main SDK.</p>
 
 
 
