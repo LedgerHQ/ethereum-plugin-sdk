@@ -40,8 +40,7 @@ static const char HEXDIGITS[] = "0123456789abcdef";
  * @deprecated
  * See format_hex in SDK
  */
-DEPRECATED static inline void array_hexstr(char *strbuf, const void *bin, unsigned int len)
-{
+DEPRECATED static inline void array_hexstr(char *strbuf, const void *bin, unsigned int len) {
     // Consider the output buffer is sufficiently large!
     format_hex(bin, len, strbuf, (2 * len + 1));
 }
@@ -71,11 +70,11 @@ void getEthAddressFromRawKey(const uint8_t raw_pubkey[static 65],
                              uint8_t out[static ADDRESS_LENGTH]);
 
 void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
-                                   char out[static (ADDRESS_LENGTH * 2) + 1],
+                                   char out[static(ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId);
 
 bool getEthAddressStringFromBinary(uint8_t *address,
-                                   char out[static (ADDRESS_LENGTH * 2) + 1],
+                                   char out[static(ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId);
 
 bool getEthDisplayableAddress(uint8_t *in, char *out, size_t out_len, uint64_t chainId);
