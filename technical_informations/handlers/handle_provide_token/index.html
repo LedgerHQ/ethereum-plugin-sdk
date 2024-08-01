@@ -943,10 +943,11 @@ ERC20 token information in <code>handle_finalize</code></p>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The Ethereum application can only provide to the plugin information about</p>
+<p>The Ethereum application can only provide to the plugin information about
+ERC20 token it knows about.<br/>
+You need to provide the ERC20 token information to the Ethereum application
+using <code>PROVIDE ERC 20 TOKEN INFORMATION</code> APDU.</p>
 </div>
-<p>ERC20 token it knows about. You need to provide the ERC20 token information to
-the Ethereum application using <code>PROVIDE ERC 20 TOKEN INFORMATION</code> APDU.</p>
 <p>An example of token info providing is already done in the boilerplate plugin.
 Adapt and expand it for your use case.</p>
 <h2 id="fields-descriptions">Fields descriptions</h2>

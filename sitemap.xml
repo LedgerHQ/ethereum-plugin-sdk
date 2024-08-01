@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://LedgerHQ.github.io/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/diagram/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/globals/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/tx_content/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/handle_finalize/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/handle_init_contract/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/handle_provide_parameter/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/handle_provide_token/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/handle_query_contract_id/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/handlers/handle_query_contract_ui/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/utils/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/utils/common_utils/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/technical_informations/utils/plugin_utils/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/test_framework/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/test_framework/ci/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/test_framework/fuzzing/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/test_framework/ragger/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://LedgerHQ.github.io/walkthrough/</loc>
-         <lastmod>2024-07-30</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
