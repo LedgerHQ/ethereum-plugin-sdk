@@ -18,14 +18,6 @@
 #include "eth_plugin_interface.h"
 #include "swap_lib_calls.h"  // RUN_APPLICATION
 
-// Functions implemented by the plugin
-void handle_init_contract(ethPluginInitContract_t *parameters);
-void handle_provide_parameter(ethPluginProvideParameter_t *parameters);
-void handle_finalize(ethPluginFinalize_t *parameters);
-void handle_provide_token(ethPluginProvideInfo_t *parameters);
-void handle_query_contract_id(ethQueryContractID_t *parameters);
-void handle_query_contract_ui(ethQueryContractUI_t *parameters);
-
 // Calls the ethereum app.
 static void call_app_ethereum() {
     unsigned int libcall_params[5];
@@ -105,8 +97,9 @@ __attribute__((section(".boot"))) int main(int arg0) {
                 // Not called from dashboard: called from the ethereum app!
                 const unsigned int *args = (unsigned int *) arg0;
 
-                // If `ETH_PLUGIN_CHECK_PRESENCE` is set, this means the caller is just trying to
-                // know whether this app exists or not. We can skip `paraswap_plugin_call`.
+                // If `ETH_PLUGIN_CHECK_PRESENCE` is set, this means the caller
+                // is just trying to know whether this app exists or not. We can
+                // skip `paraswap_plugin_call`.
                 if (args[0] != ETH_PLUGIN_CHECK_PRESENCE) {
                     dispatch_call(args[0], (void *) args[1]);
                 }
