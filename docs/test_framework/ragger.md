@@ -1,0 +1,1 @@
+--8<-- "app-plugin-boilerplate/tests/README.md"

@@ -20,6 +20,7 @@
 #include <stdint.h>
 #include "common_utils.h"
 
+// --8<-- [start:asset_info]
 // NFT
 
 #define COLLECTION_NAME_MAX_LEN 70
@@ -49,3 +50,4 @@ typedef union extraInfo_t {
     nftInfo_t nft;
 #endif
 } extraInfo_t;
+// --8<-- [end:asset_info]

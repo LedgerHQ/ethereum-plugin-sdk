@@ -17,5 +17,7 @@
 
 #pragma once
 
-// Empty file, introduced to not break compatibility following plugin-sdk structure rework
-#warning "Deprecated file, the sdk sources have been rationalized in several dedicated files."
+// Empty file, introduced to not break compatibility following plugin-sdk
+// structure rework
+#warning \
+    "Deprecated file, the sdk sources have been rationalized in several dedicated files."
