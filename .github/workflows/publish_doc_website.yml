@@ -39,6 +39,6 @@ jobs:
 
       - name: Deploy docs
         run: |
-          mkdocs gh-deploy
+          mkdocs gh-deploy --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
