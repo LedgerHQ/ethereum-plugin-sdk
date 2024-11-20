@@ -21,11 +21,12 @@
 // interface is introduced.
 typedef enum eth_plugin_interface_version_e {
     ETH_PLUGIN_INTERFACE_VERSION_1 = 1,
-    ETH_PLUGIN_INTERFACE_VERSION_2 = 2,
-    ETH_PLUGIN_INTERFACE_VERSION_3 = 3,
-    ETH_PLUGIN_INTERFACE_VERSION_4 = 4,
-    ETH_PLUGIN_INTERFACE_VERSION_5 = 5,
-    ETH_PLUGIN_INTERFACE_VERSION_LATEST = 6,
+    ETH_PLUGIN_INTERFACE_VERSION_2,
+    ETH_PLUGIN_INTERFACE_VERSION_3,
+    ETH_PLUGIN_INTERFACE_VERSION_4,
+    ETH_PLUGIN_INTERFACE_VERSION_5,
+    ETH_PLUGIN_INTERFACE_VERSION_6,
+    ETH_PLUGIN_INTERFACE_VERSION_LATEST,
 } eth_plugin_interface_version_t;
 
 // Codes for the different requests Ethereum can send to the plugin
