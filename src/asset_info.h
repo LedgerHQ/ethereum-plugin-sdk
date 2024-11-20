@@ -25,29 +25,35 @@
 
 #define COLLECTION_NAME_MAX_LEN 70
 
-typedef struct nftInfo_t {
-    uint8_t contractAddress[ADDRESS_LENGTH];  // must be first item
-    char collectionName[COLLECTION_NAME_MAX_LEN + 1];
-} nftInfo_t;
+typedef struct {
+    char collection_name[COLLECTION_NAME_MAX_LEN + 1];
+} nft_info_t;
 
 // TOKENS
 
-#define MAX_TICKER_LEN 11  // 10 characters + '\0'
+#define MAX_TICKER_LEN 10
 
-typedef struct tokenDefinition_t {
-    uint8_t address[ADDRESS_LENGTH];  // must be first item
-    char ticker[MAX_TICKER_LEN];
+typedef struct {
+    char ticker[MAX_TICKER_LEN + 1];
     uint8_t decimals;
-} tokenDefinition_t;
+} token_info_t;
 
-// UNION
+typedef enum {
+    ASSET_NFT,
+    ASSET_TOKEN,
+} asset_type_t;
 
-typedef union extraInfo_t {
-    tokenDefinition_t token;
+typedef struct {
+    asset_type_t type;
+    uint64_t chain_id;
+    uint8_t address[ADDRESS_LENGTH];
+    union {
+        token_info_t token;
 // Would have used HAVE_NFT_SUPPORT but it is only declared for the Ethereum app
 // and not plugins
 #ifndef TARGET_NANOS
-    nftInfo_t nft;
+        nft_info_t nft;
 #endif
-} extraInfo_t;
+    };
+} asset_info_t;
 // --8<-- [end:asset_info]

@@ -320,9 +320,9 @@ typedef struct ethPluginProvideInfo_s {
 
     // INPUT. ERC20 token information as requested by tokenLookup1 in
     // handle_finalize. NULL if not found.
-    union extraInfo_t *item1;
+    asset_info_t *item1;
     // INPUT. Same as item1 but for tokenLookup2.
-    union extraInfo_t *item2;
+    asset_info_t *item2;
 
     // OUTPUT. Set by the plugin if it needs to display additional screens based
     // on the information received from the token definitions.
@@ -410,9 +410,9 @@ typedef struct ethQueryContractUI_s {
 
     // INPUT. ERC20 token information as requested by tokenLookup1 in
     // handle_finalize. NULL if not found.
-    union extraInfo_t *item1;
+    asset_info_t *item1;
     // INPUT. Same as item1 but for tokenLookup2.
-    union extraInfo_t *item2;
+    asset_info_t *item2;
 
     // INPUT. String that holds the network ticker
     char network_ticker[MAX_TICKER_LEN];
