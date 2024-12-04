@@ -9,6 +9,7 @@
 #include "common_utils.h"
 #include "plugin_utils.h"
 #include "tx_content.h"
+#include "bip32_utils.h"
 
 /*************************************************************************************************
  * Comments provided in this file are quick reminders on the usage of the plugin interface       *
@@ -156,6 +157,7 @@ typedef struct ethPluginInitContract_s {
 
     // INPUT. Total length of the data to come.
     size_t dataSize;
+    bip32_path_t *bip32;
 
 } ethPluginInitContract_t;
 // --8<-- [end:handle_init_contract_parameters]
