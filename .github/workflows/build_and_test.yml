@@ -18,7 +18,7 @@ jobs:
       app_repository: LedgerHQ/app-ethereum
       app_branch_name: develop
       upload_app_binaries_artifact: "ethereum_binaries"
-      flags: "CAL_TEST_KEY=1 DOMAIN_NAME_TEST_KEY=1 SET_PLUGIN_TEST_KEY=1 NFT_TEST_KEY=1"
+      flags: "CAL_TEST_KEY=1 TRUSTED_NAME_TEST_KEY=1 SET_PLUGIN_TEST_KEY=1 NFT_TEST_KEY=1"
 
   ragger_ethereum_tests:
     name: Run ragger tests using the reusable workflow
