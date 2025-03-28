@@ -112,6 +112,7 @@ __attribute__((section(".boot"))) int main(int arg0) {
             __builtin_unreachable();
         }
         CATCH_OTHER(e) {
+            (void) e;
             PRINTF("Exiting following exception: %d\n", e);
         }
         FINALLY {
