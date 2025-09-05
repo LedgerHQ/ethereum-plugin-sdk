@@ -38,7 +38,7 @@ jobs:
       compatible_devices: 'None'
 
   build:
-    name: Build application for NanoS, X, S+, and Stax
+    name: Build application for Ledger devices
     needs: call_get_app_metadata
     strategy:
       fail-fast: false
