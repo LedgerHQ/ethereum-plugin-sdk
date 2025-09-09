@@ -5,7 +5,14 @@
 | :rotating_light:     | Breaks build                  |
 | :warning:            | Breaks compatibility with app |
 
-## [latest](/) - 2024/05/13
+## [latest](/) - 2025/09/09
+
+### Added
+
+* Apex support
+
+
+## [2ced76b](/../../commit/2ced76b) - 2024/05/13
 
 ### Added
 

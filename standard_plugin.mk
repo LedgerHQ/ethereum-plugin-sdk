@@ -35,10 +35,14 @@ ICON_NANOX = icons/nanox_app_$(NORMAL_NAME).gif
 ICON_NANOSP = $(ICON_NANOX)
 ICON_STAX = icons/stax_app_$(NORMAL_NAME).gif
 ICON_FLEX = icons/flex_app_$(NORMAL_NAME).gif
+ICON_APEX_P = icons/apex_app_$(NORMAL_NAME).png
 
 ifeq ($(TARGET_NAME),$(filter $(TARGET_NAME),TARGET_STAX TARGET_FLEX))
     DEFINES += ICONGLYPH=C_stax_$(NORMAL_NAME)_64px
     DEFINES += ICONBITMAP=C_stax_$(NORMAL_NAME)_64px_bitmap
+else ifeq ($(TARGET_NAME),TARGET_APEX_P)
+    DEFINES += ICONGLYPH=C_apex_$(NORMAL_NAME)_48px
+    DEFINES += ICONBITMAP=C_apex_$(NORMAL_NAME)_48px_bitmap
 endif
 
 CURVE_APP_LOAD_PARAMS = secp256k1
