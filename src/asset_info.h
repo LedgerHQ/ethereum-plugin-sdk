@@ -32,7 +32,7 @@ typedef struct nftInfo_t {
 
 // TOKENS
 
-#define MAX_TICKER_LEN 11  // 10 characters + '\0'
+#define MAX_TICKER_LEN 51  // 50 characters + '\0'
 
 typedef struct tokenDefinition_t {
     uint8_t address[ADDRESS_LENGTH];  // must be first item

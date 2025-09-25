@@ -39,7 +39,7 @@ jobs:
 
   ragger_plugin_boilerplate_tests:
     name: Run ragger tests using the reusable workflow
-    needs: build_plugin_boilerplate_application
+    needs: [build_plugin_boilerplate_application, build_ethereum_application]
     uses: LedgerHQ/ledger-app-workflows/.github/workflows/reusable_ragger_tests.yml@v1
     with:
       app_repository: LedgerHQ/app-plugin-boilerplate
