@@ -248,7 +248,7 @@ void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
     getEthAddressStringFromBinary(hashAddress + 12, out, chainId);
 }
 
-bool getEthAddressStringFromBinary(uint8_t *address,
+bool getEthAddressStringFromBinary(const uint8_t *address,
                                    char out[static(ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId) {
     // save some precious stack space
@@ -313,7 +313,7 @@ bool getEthAddressStringFromBinary(uint8_t *address,
     return true;
 }
 
-bool getEthDisplayableAddress(uint8_t *in,
+bool getEthDisplayableAddress(const uint8_t *in,
                               char *out,
                               size_t out_len,
                               uint64_t chainId) {
@@ -341,7 +341,7 @@ int allzeroes(const void *buf, size_t n) {
     return 1;
 }
 
-int ismaxint(uint8_t *buf, int n) {
+int ismaxint(const uint8_t *buf, int n) {
     for (int i = 0; i < n; ++i) {
         if (buf[i] != 0xff) {
             return 0;

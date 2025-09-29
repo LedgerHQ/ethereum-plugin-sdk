@@ -210,7 +210,7 @@ void getEthAddressStringFromRawKey(const uint8_t raw_pubkey[static 65],
  * @return true if the conversion was successful and the output buffer contains
  * the resulting string, false if an error occurs.
  */
-bool getEthAddressStringFromBinary(uint8_t *address,
+bool getEthAddressStringFromBinary(const uint8_t *address,
                                    char out[static(ADDRESS_LENGTH * 2) + 1],
                                    uint64_t chainId);
 
@@ -236,7 +236,7 @@ bool getEthAddressStringFromBinary(uint8_t *address,
  * uint8_t*:0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB ->
  *      char*:"0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB\0"
  */
-bool getEthDisplayableAddress(uint8_t *in,
+bool getEthDisplayableAddress(const uint8_t *in,
                               char *out,
                               size_t out_len,
                               uint64_t chainId);
@@ -264,7 +264,7 @@ int allzeroes(const void *buf, size_t n);
  * @param n The number of bytes to check in the buffer.
  * @return 1 if all bytes in the buffer are 0xff, 0 otherwise.
  */
-int ismaxint(uint8_t *buf, int n);
+int ismaxint(const uint8_t *buf, int n);
 
 /**
  * @deprecated
