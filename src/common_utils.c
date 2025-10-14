@@ -201,35 +201,42 @@ bool amountToString(const uint8_t *amount,
                     const char *ticker,
                     char *out_buffer,
                     size_t out_buffer_size) {
-    char tmp_buffer[100] = {0};
+    uint8_t amount_len = 0;
+    uint8_t ticker_len = 0;
+    char raw_amount_buffer[100] = {0};
 
+    memset(out_buffer, 0, out_buffer_size);
+
+    // Convert the amount to decimal string first
     if (uint256_to_decimal(amount,
                            amount_size,
-                           tmp_buffer,
-                           sizeof(tmp_buffer)) == false) {
+                           raw_amount_buffer,
+                           sizeof(raw_amount_buffer)) == false) {
+        PRINTF("uint256_to_decimal failed\n");
         return false;
     }
-
-    uint8_t amount_len = strnlen(tmp_buffer, sizeof(tmp_buffer));
-    uint8_t ticker_len = strnlen(ticker, MAX_TICKER_LEN);
-
-    if (ticker_len > 0) {
-        if (out_buffer_size <= ticker_len + 1) {
-            return false;
-        }
-        memcpy(out_buffer, ticker, ticker_len);
-        out_buffer[ticker_len++] = ' ';
-    }
-
-    if (adjustDecimals(tmp_buffer,
+    // Adjust the decimal position, store the result in out_buffer
+    amount_len = strnlen(raw_amount_buffer, sizeof(raw_amount_buffer));
+    ticker_len = strnlen(ticker, MAX_TICKER_LEN);
+    if (adjustDecimals(raw_amount_buffer,
                        amount_len,
-                       out_buffer + ticker_len,
-                       out_buffer_size - ticker_len - 1,
+                       out_buffer,
+                       out_buffer_size,
                        decimals) == false) {
+        PRINTF("adjustDecimals failed\n");
         return false;
     }
 
-    out_buffer[out_buffer_size - 1] = '\0';
+    // out_buffer will contain the amount, a space and the ticker, ended with \0
+    if ((strlen(out_buffer) + 1 + ticker_len + 1) > out_buffer_size) {
+        PRINTF("Not enough space for ticker\n");
+        return false;
+    }
+    // Append a space and the ticker to the out_buffer
+    // strlcat cannot fail here as we checked boundaries above
+    strlcat(out_buffer, " ", out_buffer_size);
+    strlcat(out_buffer, ticker, out_buffer_size);
+
     return true;
 }
 
