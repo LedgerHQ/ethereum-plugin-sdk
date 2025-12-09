@@ -199,6 +199,9 @@ typedef struct ethPluginProvideParameter_s {
     // the generic one
     eth_plugin_result_t result;
 
+    // INPUT. Size of the parameter, usually 32 but can also be less for the
+    // last one.
+    uint8_t parameter_size;
 } ethPluginProvideParameter_t;
 // --8<-- [end:handle_provide_parameter_parameters]
 
