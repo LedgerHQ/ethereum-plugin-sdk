@@ -30,5 +30,3 @@ typedef struct caller_app_t {
 #endif
     char type;  // does not have to be set by the caller app
 } caller_app_t;
-
-extern caller_app_t *caller_app;
