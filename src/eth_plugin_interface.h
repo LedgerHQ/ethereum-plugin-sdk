@@ -5,7 +5,7 @@
 
 // Include other header compatible with plugins
 #include "asset_info.h"
-#include "caller_api.h"
+#include "caller_app.h"
 #include "common_utils.h"
 #include "plugin_utils.h"
 #include "tx_content.h"
