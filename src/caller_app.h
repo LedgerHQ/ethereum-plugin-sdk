@@ -28,7 +28,5 @@ typedef struct caller_app_t {
 #ifdef HAVE_NBGL
     const nbgl_icon_details_t *icon;
 #endif
-    char type;  // does not have to be set by the caller app
+    e_caller_type type;  // does not have to be set by the caller app
 } caller_app_t;
-
-extern caller_app_t *caller_app;
