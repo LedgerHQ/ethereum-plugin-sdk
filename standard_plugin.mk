@@ -62,4 +62,7 @@ DISABLE_STANDARD_BAGL_UX_FLOW = 1
 DISABLE_DEBUG_LEDGER_ASSERT = 1
 DISABLE_DEBUG_THROW = 1
 
+# so that a plugin cannot be installed without the Ethereum app
+DEP_APP_LOAD_PARAMS = Ethereum
+
 include $(BOLOS_SDK)/Makefile.standard_app
