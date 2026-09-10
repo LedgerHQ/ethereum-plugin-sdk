@@ -111,7 +111,9 @@ bool uint256_to_decimal(const uint8_t *value,
     }
     int pos = out_len;
     while (!allzeroes(n, sizeof(n))) {
-        if (pos == 0) {
+        // One extra digit would leave no room for the terminating NUL written
+        // after the loop at out[out_len - pos]
+        if (pos <= 1) {
             return false;
         }
         pos -= 1;
